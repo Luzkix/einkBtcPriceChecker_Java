@@ -18,7 +18,7 @@ public class PriceController {
 
   @GetMapping({"","/"})
   String displayHomepage(Model model) {
-    return "homePage";
+    return "homepage";
   }
 
   @GetMapping("/{currency}")
