@@ -16,7 +16,7 @@ public class PriceController {
     this.priceService = priceService;
   }
 
-  @GetMapping("/")
+  @GetMapping({"","/"})
   String displayHomepage(Model model) {
     return "homePage";
   }
