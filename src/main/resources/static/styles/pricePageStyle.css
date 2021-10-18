@@ -166,6 +166,7 @@ body {
     margin-left: auto;
     margin-right: 0;
     font-size: 3vh;
+    color: darkgrey;
 
     display: inline-flex;
     align-items: center;
