@@ -29,7 +29,6 @@ public class PriceController {
     }
 
     model.addAttribute("bitcoinObject", priceService.getPrice(currency));
-    model.addAttribute("serverTime", LocalDateTime.now());
     model.addAttribute("currency", currency);
 
     return "pricePage";

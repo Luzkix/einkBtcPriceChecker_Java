@@ -27,7 +27,7 @@
     <div class="background">
 
         <div class="clockBlock">
-            <span id="clock" th:text="'🕑' + ${#temporals.format(serverTime,'HH:mm')}"></span>
+            <span id="clock"/> <!--added by javascript-->
         </div>
 
         <div class="btcTextBlock">
@@ -49,7 +49,7 @@
                       + *{priceChangePercentage} + '%'"/>
             </div>
             <div class="lastUpdatelock">
-                <span id="lastUpdate" th:text="'Last update: '+*{#temporals.format(lastUpdate,'HH:mm:ss')}"></span>
+                <span id="lastUpdate" th:text="'Last update: '+*{#temporals.format(lastUpdate,'HH:mm:ss')+' UTC'}"></span>
             </div>
         </div>
 
@@ -58,11 +58,21 @@
 </body>
 <!-- Optional JavaScript -->
 <script>
+    // picture actual time in minutes
+    var today = new Date();
+    function minutes(today) {
+        return (today.getMinutes() < 10 ? '0' : '') + today.getMinutes();
+    }
+    var timeInMinutes = today.getHours() + ":" + minutes(today);
+    document.getElementById("clock").innerHTML = "🕑" + timeInMinutes;
+
+
     function updatePriceInfo() {
         var actualSec = new Date().getSeconds();
         console.log(actualSec);
-        if (actualSec == 0 || actualSec == 30 || actualSec == 15 || actualSec == 45)
+        if (actualSec == 0 || actualSec == 30) {
             window.location.reload(false);
+        }
     }
 
     setInterval(updatePriceInfo, 1000);
