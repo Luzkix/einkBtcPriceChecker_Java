@@ -4,9 +4,6 @@ plugins {
     id 'java'
 }
 
-apply plugin: 'checkstyle'
-apply plugin: 'jacoco'
-
 group = 'com.greenfoxacademy'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '8'
@@ -16,17 +13,6 @@ configurations {
     runtimeClasspath {
         extendsFrom developmentOnly
     }
-}
-
-checkstyle {
-    toolVersion "8.18"
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled false
-        html.enabled true
-        html.destination file("${buildDir}/jacoco")    }
 }
 
 repositories {
