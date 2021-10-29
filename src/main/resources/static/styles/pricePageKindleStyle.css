@@ -32,7 +32,7 @@ body {
 
 .clockBlock {
     width: 100vw;
-    height: 16vh;
+    height: 15vh;
     margin: 0px;
     padding: 0vh;
     display: inline-flex;
@@ -44,8 +44,8 @@ body {
     padding-right: 3vw;
     margin: 0;
     margin-left: auto;
-    margin-right: 0;
-    font-size: 12vw;
+    margin-right: auto;
+    font-size: 14vh;
     font-weight: bold;
 
     display: inline-flex;
@@ -66,7 +66,7 @@ body {
     width: auto;
     height: 100%;
 
-    margin-left: 0; /*horizontální vystředění*/
+    margin-left: auto; /*horizontální vystředění*/
     margin-right: auto; /*horizontální vystředění*/
 
     display: inline-flex;
@@ -84,7 +84,7 @@ body {
 
 .btcPriceBlock {
     width: 100vw;
-    height: 40vh;
+    height: 26vh;
     padding: 0vh;
     display: inline-flex;
     align-items: center;
@@ -99,8 +99,7 @@ body {
     margin-left: auto;
     margin-right: auto;
 
-    /*font-size: 33vh;*/
-    font-size: 24vw;
+    font-size: 25vw;
 
     display: inline-flex;
     align-items: center;
@@ -111,7 +110,7 @@ body {
 
 .btcChangeBlock {
     width: 100vw;
-    height: 17vh;
+    height: 30vh;
     padding: 0vh;
     display: inline-block;
     align-items: center;
@@ -125,7 +124,7 @@ body {
     margin: 0;
     margin-left: auto;
     margin-right: auto;
-    font-size: 12vw;
+    font-size: 12vh;
     font-weight: bold;
 
     display: inline;
@@ -139,7 +138,7 @@ body {
     margin: 0;
     margin-left: auto;
     margin-right: auto;
-    font-size: 12vw;
+    font-size: 12vh;
     font-weight: normal;
 
     display: inline;
@@ -154,7 +153,7 @@ body {
 
 .lastUpdateBlock {
     width: 100vw;
-    height: 4vh;
+    height: 2vh;
     margin: 0px;
     padding: 0vh 0vw 0vh 0vw;
     display: inline-flex;
@@ -166,7 +165,7 @@ body {
     margin: 0;
     margin-left: auto;
     margin-right: 0;
-    font-size: 2vw;
+    font-size: 2vh;
     color: darkgrey;
 
     display: inline-flex;
