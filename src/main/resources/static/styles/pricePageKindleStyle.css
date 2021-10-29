@@ -124,7 +124,7 @@ body {
     margin: 0;
     margin-left: auto;
     margin-right: auto;
-    font-size: 12vh;
+    font-size: 13vh;
     font-weight: bold;
 
     display: inline;
@@ -133,12 +133,12 @@ body {
     vertical-align: middle;
 }
 
-#btcChangeBracelets {
+#btcChangePercentage {
     padding: 0vh 0vw 0vh 0vw;
     margin: 0;
     margin-left: auto;
     margin-right: auto;
-    font-size: 12vh;
+    font-size: 13vh;
     font-weight: normal;
 
     display: inline;
@@ -151,7 +151,7 @@ body {
     font-weight: bold;
 }
 
-.lastUpdateBlock {
+/*.lastUpdateBlock {
     width: 100vw;
     height: 2vh;
     margin: 0px;
@@ -171,4 +171,4 @@ body {
     display: inline-flex;
     align-items: center;
     text-align: end;
-}
+}*/
