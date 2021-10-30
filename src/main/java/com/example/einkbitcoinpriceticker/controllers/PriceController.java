@@ -1,6 +1,7 @@
 package com.example.einkbitcoinpriceticker.controllers;
 
 import com.example.einkbitcoinpriceticker.services.PriceServiceImpl;
+import java.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,19 +32,6 @@ public class PriceController {
     model.addAttribute("currency", currency);
 
     return "pricePage";
-  }
-
-  @GetMapping("/KINDLE/{currency}")
-  String displayPriceKindle(@PathVariable String currency, Model model) {
-    //if unknown currency, set USD as default
-    if(!currency.equals("USD") && !currency.equals("EUR")) {
-      currency = "USD";
-    }
-
-    model.addAttribute("bitcoinObject", priceService.getPrice(currency));
-    model.addAttribute("currency", currency);
-
-    return "pricePageKindle";
   }
 
 /*  //Refreshing fragment of html

@@ -32,7 +32,7 @@ body {
 
 .clockBlock {
     width: 100vw;
-    height: 16vh;
+    height: 15vh;
     margin: 0px;
     padding: 0vh;
     display: inline-flex;
@@ -45,7 +45,7 @@ body {
     margin: 0;
     margin-left: auto;
     margin-right: 0;
-    font-size: 12vw;
+    font-size: 14vh;
     font-weight: bold;
 
     display: inline-flex;
@@ -99,8 +99,7 @@ body {
     margin-left: auto;
     margin-right: auto;
 
-    /*font-size: 33vh;*/
-    font-size: 24vw;
+    font-size: 33vh;
 
     display: inline-flex;
     align-items: center;
@@ -113,7 +112,7 @@ body {
     width: 100vw;
     height: 17vh;
     padding: 0vh;
-    display: inline-block;
+    display: inline-flex;
     align-items: center;
     text-align: center;
     vertical-align: middle;
@@ -125,7 +124,7 @@ body {
     margin: 0;
     margin-left: auto;
     margin-right: auto;
-    font-size: 12vh;
+    font-size: 15vh;
     font-weight: bold;
 
     display: inline;
@@ -134,12 +133,12 @@ body {
     vertical-align: middle;
 }
 
-#btcChangePercentage {
+#btcChangeBracelets {
     padding: 0vh 0vw 0vh 0vw;
     margin: 0;
     margin-left: auto;
     margin-right: auto;
-    font-size: 12vh;
+    font-size: 15vh;
     font-weight: normal;
 
     display: inline;
@@ -152,7 +151,7 @@ body {
     font-weight: bold;
 }
 
-/*.lastUpdateBlock {
+.lastUpdatelock {
     width: 100vw;
     height: 4vh;
     margin: 0px;
@@ -166,10 +165,10 @@ body {
     margin: 0;
     margin-left: auto;
     margin-right: 0;
-    font-size: 2vw;
+    font-size: 3vh;
     color: darkgrey;
 
     display: inline-flex;
     align-items: center;
     text-align: end;
-}*/
+}
