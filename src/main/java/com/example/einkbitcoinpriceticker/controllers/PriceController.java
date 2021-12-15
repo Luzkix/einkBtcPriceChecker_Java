@@ -2,6 +2,7 @@ package com.example.einkbitcoinpriceticker.controllers;
 
 import com.example.einkbitcoinpriceticker.services.PriceServiceImpl;
 import java.time.LocalDateTime;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +18,12 @@ public class PriceController {
   }
 
   @GetMapping({"","/"})
-  String displayHomepage(Model model) {
+  String displayHomepage(Model model, HttpServletRequest request) {
+    System.out.println("Connected IP address: " + request.getRemoteAddr());
     return "homepage";
   }
 
-  @GetMapping("/{currency}")
+  @GetMapping("/{ currency}")
   String displayPrice(@PathVariable String currency, Model model) {
     //if unknown currency, set USD as default
     if(!currency.equals("USD") && !currency.equals("EUR")) {
