@@ -1,13 +1,14 @@
 package com.example.einkbitcoinpriceticker.controllers;
 
 import com.example.einkbitcoinpriceticker.services.PriceServiceImpl;
-import java.time.LocalDateTime;
 import javax.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@Slf4j
 @Controller
 public class PriceController {
 
@@ -19,7 +20,8 @@ public class PriceController {
 
   @GetMapping({"","/"})
   String displayHomepage(Model model, HttpServletRequest request) {
-    System.out.println("Connected IP address: " + request.getRemoteAddr());
+    log.info("Connected IP address: " + request.getRemoteAddr());
+    
     return "homepage";
   }
 
