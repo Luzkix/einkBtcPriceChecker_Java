@@ -21,11 +21,11 @@ public class PriceController {
   @GetMapping({"","/"})
   String displayHomepage(Model model, HttpServletRequest request) {
     log.info("Connected IP address: " + request.getRemoteAddr());
-    
+
     return "homepage";
   }
 
-  @GetMapping("/{ currency}")
+  @GetMapping("/{currency}")
   String displayPrice(@PathVariable String currency, Model model) {
     //if unknown currency, set USD as default
     if(!currency.equals("USD") && !currency.equals("EUR")) {
