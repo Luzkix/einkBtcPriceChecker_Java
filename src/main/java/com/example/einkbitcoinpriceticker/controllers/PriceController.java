@@ -19,14 +19,14 @@ public class PriceController {
   }
 
   @GetMapping({"","/"})
-  String displayHomepage(Model model, HttpServletRequest request) {
+  String displayHomepage(HttpServletRequest request) {
     log.info("Connected IP address: " + request.getRemoteAddr());
 
     return "homepage";
   }
 
-  @GetMapping("/{currency}")
-  String displayPrice(@PathVariable String currency, Model model) {
+  @GetMapping("/{nightMode}/{currency}/")
+  String displayPrice(@PathVariable String currency, @PathVariable String nightMode, Model model) {
     //if unknown currency, set USD as default
     if(!currency.equals("USD") && !currency.equals("EUR")) {
       currency = "USD";
@@ -35,7 +35,9 @@ public class PriceController {
     model.addAttribute("bitcoinObject", priceService.getPrice(currency));
     model.addAttribute("currency", currency);
 
-    return "pricePage";
+    if(nightMode.equals("night")) {
+      return "pricePageNight";
+    } else return "pricePage";
   }
 
 /*  //Refreshing fragment of html

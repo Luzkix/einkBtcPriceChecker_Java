@@ -6,6 +6,8 @@
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
     <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
 
@@ -20,12 +22,18 @@
     <h1>E-ink Bitcoin Price Checker</h1>
     <p>Welcome to my simple Bitcoin Price Checker!</p>
     <p>This miniproject is about building easy to use web application/webpage which shows actual price of Bitcoin in USD/EUR.
-        The view is very simplistic, e-ink and widescreen optimised (I build it primarily for my android based e-ink book reader Likebook Mars).
-        Data are gathered from Coinbase API. </p>
-    <p>Select currency you want to display:</p>
+        The view is very simplistic, e-ink and widescreen optimised (I build it primarily for my android based e-ink book reader Likebook Mars, however every phone/tablet in widescreen should be fine).
+        Data are updated once per 30 sec based on Coinbase API. </p>
+    <h3>Select currency you want to display:</h3>
     <div class="currencies">
-        <a th:href="@{/USD}"><img id="dollar" src="icons/dollar_small.png"/></a>
-        <a th:href="@{/EUR}"><img id="euro" src="icons/euro_small.png"/></a>
+        <a th:href="@{/day/USD/}"><img id="dollar" src="icons/dollar_small.png"/></a>
+        <a th:href="@{/day/EUR/}"><img id="euro" src="icons/euro_small.png"/></a>
+    </div>
+
+    <div class="nightMode">
+        For <strong>NIGHTMODE</strong> choose one of the following links:
+        <li><a th:href="@{/night/USD/}">USD nightmode</a></li>
+        <li><a th:href="@{/night/EUR/}">EUR nightmode</a></li>
     </div>
 
 </body>
