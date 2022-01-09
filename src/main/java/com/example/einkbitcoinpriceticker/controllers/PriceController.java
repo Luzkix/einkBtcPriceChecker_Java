@@ -1,6 +1,10 @@
 package com.example.einkbitcoinpriceticker.controllers;
 
+import com.example.einkbitcoinpriceticker.models.BitcoinPriceEntity;
 import com.example.einkbitcoinpriceticker.services.PriceServiceImpl;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -40,11 +44,32 @@ public class PriceController {
     } else return "pricePage";
   }
 
-/*  //Refreshing fragment of html
-  @GetMapping("/priceContainer")
-  String priceContainerUpdate(Model model) {
-    model.addAttribute("bitcoinObject", priceService.getPrice("USD"));
+  @GetMapping("/refresh/{nightMode}/{currency}/")
+  String refreshPrice(@PathVariable String currency, @PathVariable String nightMode, Model model) {
+    //if unknown currency, set USD as default
+    if(!currency.equals("USD") && !currency.equals("EUR")) {
+      currency = "USD";
+    }
 
-    return "homePage :: #priceContainer";
-  }*/
+    BitcoinPriceEntity bitcoinPrice = priceService.getPrice(currency);
+    long minutes = ChronoUnit.MINUTES.between(bitcoinPrice.getLastUpdate(), LocalDateTime.now());
+
+    if(minutes > 5) {
+      LocalDateTime lastUpdate = bitcoinPrice.getLastUpdate();
+      bitcoinPrice = new BitcoinPriceEntity();
+      bitcoinPrice.setCurrency(currency);
+      bitcoinPrice.setPriceChange(0);
+      bitcoinPrice.setPriceChangePercentage("0");
+      bitcoinPrice.setLastUpdate(lastUpdate);
+    }
+
+    model.addAttribute("bitcoinObject", bitcoinPrice);
+    model.addAttribute("currency", currency);
+
+    log.info("fragments refreshed on: "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")).toString());
+
+    if(nightMode.equals("night")) {
+      return "pricePageNight :: #priceContainer";
+    } else return "pricePage :: #priceContainer";
+  }
 }

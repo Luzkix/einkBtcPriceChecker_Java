@@ -17,12 +17,15 @@
     <!-- Own CSS -->
     <link rel="stylesheet" th:href="@{/styles/pricePageStyleNight.css}"/>
 
+    <!-- jQuerry script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
     <!-- Page Title -->
     <title th:utext="${currency} + ' Bitcoin price checker - NightMode'"></title>
 
 </head>
 
-<body th:object="${bitcoinObject}">
+<body>
     <div class="background">
 
         <div class="clockBlock">
@@ -33,7 +36,7 @@
             <img id=btcText src="/icons/BTCtext.png">
         </div>
 
-        <div class="priceContainer">
+        <div class="priceContainer" id="priceContainer" th:object="${bitcoinObject}">
             <div class="btcPriceBlock">
                 <span id="btcPrice" th:utext="'<strong>' + *{#numbers.formatInteger(actualPrice,0, 'COMMA')} + '</strong>'"></span>
                 <span id="btcCurrency" th:utext="'<strong>' + *{currency} + '</strong>'"></span>
@@ -54,25 +57,7 @@
     </div>
 
 </body>
+
 <!-- Optional JavaScript -->
-<script>
-    // picture actual time in minutes
-    var today = new Date();
-    function minutes(today) {
-        return (today.getMinutes() < 10 ? '0' : '') + today.getMinutes();
-    }
-    var timeInMinutes = today.getHours() + ":" + minutes(today);
-    document.getElementById("clock").innerHTML = "🕑" + timeInMinutes;
-
-    // reload page once per X sec
-    function updatePriceInfo() {
-        var actualSec = new Date().getSeconds();
-        console.log(actualSec);
-        if (actualSec == 0 || actualSec == 30) {
-            window.location.reload(false);
-        }
-    }
-    setInterval(updatePriceInfo, 1000);
-
-</script>
+<script src="/scripts/pricePageJavaScript.js"></script>
 </html>
