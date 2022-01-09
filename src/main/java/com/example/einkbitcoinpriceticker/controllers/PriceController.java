@@ -30,7 +30,9 @@ public class PriceController {
   }
 
   @GetMapping("/{nightMode}/{currency}/")
-  String displayPrice(@PathVariable String currency, @PathVariable String nightMode, Model model) {
+  String displayPrice(@PathVariable String currency, @PathVariable String nightMode, Model model, HttpServletRequest request) {
+    log.info("Connected IP address: " + request.getRemoteAddr());
+
     //if unknown currency, set USD as default
     if(!currency.equals("USD") && !currency.equals("EUR")) {
       currency = "USD";
@@ -66,7 +68,7 @@ public class PriceController {
     model.addAttribute("bitcoinObject", bitcoinPrice);
     model.addAttribute("currency", currency);
 
-    log.info("fragments refreshed on: "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")).toString());
+    log.info("fragments refreshed on: "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
 
     if(nightMode.equals("night")) {
       return "pricePageNight :: #priceContainer";

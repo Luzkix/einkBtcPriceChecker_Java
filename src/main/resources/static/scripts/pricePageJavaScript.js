@@ -18,10 +18,37 @@ var nightmode = urlParts[urlParts.length-3];
 var currency = urlParts[urlParts.length-2];
 
 function getFreshBitcoinObject() {
+    $.ajax(
+        {
+            type: "GET",
+            data: $("#priceContainer"),
+            cache: false,
+            url: "/refresh/"+nightmode+"/"+currency+"/",
+            success: function(fragment)
+            {
+                $("#priceContainer").replaceWith(fragment); // update snippet of page
+            },
+            error: function() //replacing individual sections with error message
+            {
+                var error = "<span id='btcPrice'><strong>ERROR</strong></span>"
+                var btcCurrency = "<span id='btcCurrency'></span>"
+                var btcChange = "<span id='btcChange' style='color:#FAA31B; font-size: 13vh;'>LOST</span>"
+                var btcChangeBracelets = "<span id='btcChangeBracelets' style='color:#FAA31B; font-size: 13vh;'>CONNECTION</span>"
+
+                $("#btcPrice").replaceWith(error);
+                $("#btcCurrency").replaceWith(btcCurrency);
+                $("#btcChange").replaceWith(btcChange);
+                $("#btcChangeBracelets").replaceWith(btcChangeBracelets);
+            }
+        });
+}
+
+/*function getFreshBitcoinObject() {
+    //it also refreshes the fragment - it is sufficient in case I don´t need to deal with error
     $.get("/refresh/"+nightmode+"/"+currency+"/").done(function(fragment) { // get from controller
         $("#priceContainer").replaceWith(fragment); // update snippet of page
     });
-}
+}*/
 
 //refreshing page sections based on set interval
 function refreshPageValues() {

@@ -5,7 +5,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class JsonServiceImpl implements JsonService {
 
@@ -28,7 +30,7 @@ public class JsonServiceImpl implements JsonService {
       int responsecode = conn.getResponseCode();
 
       if (responsecode != 200) {
-        System.out.println("Wrong HttpResponseCode from Coinbase: " + responsecode);
+        log.info("Wrong HttpResponseCode from Coinbase: " + responsecode);
         throw new RuntimeException("Wrong HttpResponseCode from Coinbase: " + responsecode);
       } else {
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -42,7 +44,7 @@ public class JsonServiceImpl implements JsonService {
 
         //Parse the string into a json object
         JSONObject jsonObject = new JSONObject(content.toString());
-        System.out.println(jsonObject);
+        log.info("Latest price data :" + jsonObject);
 
         return jsonObject;
       }
