@@ -8,7 +8,7 @@ function getClock() {
     document.getElementById("clock").innerHTML = "🕑" + timeInMinutes;
 }
 
-// displaying clock when page is loaded first time
+// displaying clock immediately when the page is loaded
 getClock();
 
 // getting fresh th:object "bitcoinObject" for refreshing priceContainer fragment
@@ -23,13 +23,19 @@ function getFreshBitcoinObject() {
     });
 }
 
-//refreshing page values based on set interval
+//refreshing page sections based on set interval
 function refreshPageValues() {
     var actualSec = new Date().getSeconds();
     //console.log(actualSec);
     if (actualSec == 0 || /*actualSec == 10|| actualSec == 20||*/ actualSec == 30 /*|| actualSec == 40|| actualSec == 50*/) {
         getClock();
         getFreshBitcoinObject();
+        console.log("fragments refreshed on: " + actualSec + "s");
     }
 }
 setInterval(refreshPageValues, 1000);
+
+// reload whole page once per X msec (actually 24 hours) so the page receives new code updates automatically
+setTimeout(function() {
+    window.location.reload(false);
+}, 86400000);
