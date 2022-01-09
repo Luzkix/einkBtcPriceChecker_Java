@@ -1,6 +1,6 @@
 package com.example.einkbitcoinpriceticker.services;
 
-import com.example.einkbitcoinpriceticker.models.BitcoinPriceEntity;
+import com.example.einkbitcoinpriceticker.models.BitcoinPriceDTO;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +17,12 @@ public class PriceServiceImpl implements PriceService {
   }
 
   private final int UPDATEINTERVAL = 10;
-  private BitcoinPriceEntity usdOldPrice = new BitcoinPriceEntity(0,0,"0,00","+","$");
-  private BitcoinPriceEntity eurOldPrice = new BitcoinPriceEntity(0,0,"0,00","+","€");
+  private BitcoinPriceDTO usdOldPrice = new BitcoinPriceDTO(0,0,"0,00","+","$");
+  private BitcoinPriceDTO eurOldPrice = new BitcoinPriceDTO(0,0,"0,00","+","€");
 
 
 
-  public BitcoinPriceEntity getPrice(String currency) { 
+  public BitcoinPriceDTO getPrice(String currency) {
     //if UPDATEINTERVAL was not exceeded yet, previous prices are returned
     if (currency.equals("USD") && calculateSecondsFromLastUpdate(currency) < UPDATEINTERVAL
         && usdOldPrice.getActualPrice() != 0) return usdOldPrice;
@@ -33,7 +33,7 @@ public class PriceServiceImpl implements PriceService {
     JSONObject json = jsonService.getJson(currency);
 
     //Convert json to the bitcoin price model
-    BitcoinPriceEntity bitcoinNewPrice = convertJsonToBitcoinPriceEntity(json, currency);
+    BitcoinPriceDTO bitcoinNewPrice = convertJsonToBitcoinPriceEntity(json, currency);
     if (bitcoinNewPrice == null) {
       log.error("New bitcoin price could not be retrieved from Coinbase - old value is displayed instead");
       if (currency.equals("USD")) {
@@ -56,7 +56,7 @@ public class PriceServiceImpl implements PriceService {
     } else return ChronoUnit.SECONDS.between(eurOldPrice.getLastUpdate(), LocalDateTime.now());
   }
 
-  public BitcoinPriceEntity convertJsonToBitcoinPriceEntity(JSONObject json, String currency) {
+  public BitcoinPriceDTO convertJsonToBitcoinPriceEntity(JSONObject json, String currency) {
     try {
       String open = json.getString("open");
       String last = json.getString("last");
@@ -82,11 +82,11 @@ public class PriceServiceImpl implements PriceService {
 
       LocalDateTime lastUpdate = LocalDateTime.now();
 
-      return new BitcoinPriceEntity(actualPrice,priceChangeUSD,priceChangePercentage,
+      return new BitcoinPriceDTO(actualPrice,priceChangeUSD,priceChangePercentage,
           priceChangeSign,currency,lastUpdate);
     }
     catch (Exception e) {
-      log.error("Price json from Coinbase was not successfully converted into BitcoinPriceEntity");
+      log.error("Price json from Coinbase was not successfully converted into BitcoinPriceDTO");
       return null;
     }
   }

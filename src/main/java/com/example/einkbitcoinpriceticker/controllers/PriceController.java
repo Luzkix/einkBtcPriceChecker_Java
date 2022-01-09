@@ -1,10 +1,13 @@
 package com.example.einkbitcoinpriceticker.controllers;
 
-import com.example.einkbitcoinpriceticker.models.BitcoinPriceEntity;
+import com.example.einkbitcoinpriceticker.models.BitcoinPriceDTO;
+import com.example.einkbitcoinpriceticker.models.UserIpEntity;
 import com.example.einkbitcoinpriceticker.services.PriceServiceImpl;
+import com.example.einkbitcoinpriceticker.services.UserIpService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,9 +20,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class PriceController {
 
   PriceServiceImpl priceService;
+  UserIpService userIpService;
 
-  public PriceController(PriceServiceImpl priceService) {
+  public PriceController(PriceServiceImpl priceService, UserIpService userIpService) {
     this.priceService = priceService;
+    this.userIpService = userIpService;
   }
 
   @GetMapping({"","/"})
@@ -30,13 +35,16 @@ public class PriceController {
   }
 
   @GetMapping("/{nightMode}/{currency}/")
-  String displayPrice(@PathVariable String currency, @PathVariable String nightMode, Model model, HttpServletRequest request) {
+  String displayPrice(@PathVariable String currency, @PathVariable String nightMode, Model model,
+                      HttpServletRequest request) {
     log.info("Connected IP address: " + request.getRemoteAddr());
 
     //if unknown currency, set USD as default
     if(!currency.equals("USD") && !currency.equals("EUR")) {
       currency = "USD";
     }
+
+    userIpService.processUserIp(request.getRemoteAddr(),currency,(nightMode.equals("night")), LocalDateTime.now());
 
     model.addAttribute("bitcoinObject", priceService.getPrice(currency));
     model.addAttribute("currency", currency);
@@ -53,12 +61,12 @@ public class PriceController {
       currency = "USD";
     }
 
-    BitcoinPriceEntity bitcoinPrice = priceService.getPrice(currency);
+    BitcoinPriceDTO bitcoinPrice = priceService.getPrice(currency);
     long minutes = ChronoUnit.MINUTES.between(bitcoinPrice.getLastUpdate(), LocalDateTime.now());
 
     if(minutes > 5) {
       LocalDateTime lastUpdate = bitcoinPrice.getLastUpdate();
-      bitcoinPrice = new BitcoinPriceEntity();
+      bitcoinPrice = new BitcoinPriceDTO();
       bitcoinPrice.setCurrency(currency);
       bitcoinPrice.setPriceChange(0);
       bitcoinPrice.setPriceChangePercentage("0");
@@ -73,5 +81,14 @@ public class PriceController {
     if(nightMode.equals("night")) {
       return "pricePageNight :: #priceContainer";
     } else return "pricePage :: #priceContainer";
+  }
+
+  @GetMapping("/stats")
+  String showStats(Model model) {
+    List<UserIpEntity> iPlist = userIpService.getIpList();
+    model.addAttribute("iPlist", iPlist);
+    model.addAttribute("totalIps",iPlist.size());
+
+    return "statsPage";
   }
 }

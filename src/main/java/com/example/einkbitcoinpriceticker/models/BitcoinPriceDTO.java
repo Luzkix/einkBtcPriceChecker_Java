@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BitcoinPriceEntity {
+public class BitcoinPriceDTO {
 
   private int actualPrice;
   private int priceChange;
@@ -19,9 +19,9 @@ public class BitcoinPriceEntity {
   private String currency;
   private LocalDateTime lastUpdate;
 
-  public BitcoinPriceEntity(int actualPrice, int priceChange,
-                            String priceChangePercentage, String priceChangeSign,
-                            String currency) {
+  public BitcoinPriceDTO(int actualPrice, int priceChange,
+                         String priceChangePercentage, String priceChangeSign,
+                         String currency) {
     this.actualPrice = actualPrice;
     this.priceChange = priceChange;
     this.priceChangePercentage = priceChangePercentage;

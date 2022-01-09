@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- IOS/Android fullScreen meta tag -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Google Font -->
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Own CSS -->
+    <link rel="stylesheet" href="/styles/statsPageStyle.css"/>
+
+    <!-- Page Title -->
+    <title>E-ink Bitcoin Price Checker Statistics</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div>
+            <h2 th:utext="'Total connected individual ip addresses: ' + ${totalIps}"></h2>
+        </div>
+
+        <div>
+            <h2>Usage overview</h2>
+        </div>
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>IP address</th>
+                <th>Currency</th>
+                <th>Night mode</th>
+                <th>Last page refresh time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ip:${iPlist}">
+                <td th:text="${ip.getUserIp()}"></td>
+                <td th:text="${ip.getCurrency()}"></td>
+                <td th:text="${ip.getNightMode()}"></td>
+                <td th:text="*{#temporals.format(ip.getLastPageRefresh(),'dd.MM.yyyy HH:mm')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<!-- Optional JavaScript -->
+<script>
+</script>
+</html>

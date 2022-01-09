@@ -1,7 +1,7 @@
 package com.example.einkbitcoinpriceticker.services;
 
-import com.example.einkbitcoinpriceticker.models.BitcoinPriceEntity;
+import com.example.einkbitcoinpriceticker.models.BitcoinPriceDTO;
 
 public interface PriceService {
-  BitcoinPriceEntity getPrice(String currency);
+  BitcoinPriceDTO getPrice(String currency);
 }

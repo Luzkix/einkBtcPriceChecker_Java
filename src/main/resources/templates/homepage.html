@@ -23,10 +23,15 @@
 
 <body>
     <h1>E-ink Bitcoin Price Checker</h1>
-    <p>Welcome to my simple Bitcoin Price Checker!</p>
+    <p><strong>Welcome to my simple Bitcoin Price Checker!</strong></p>
     <p>This miniproject is about building easy to use web application/webpage which shows actual price of Bitcoin in USD/EUR.
         The view is very simplistic, e-ink and widescreen optimised (I build it primarily for my android based e-ink book reader Likebook Mars, however every phone/tablet in widescreen should be fine).
-        Data are updated once per 30 sec based on Coinbase API. </p>
+        Data are updated once per 30 sec based on Coinbase API. If there is connection/other error, just wait, the page will fix itself in some time :-)</p>
+
+    <p><strong>Useful tips:</strong></p>
+    <li>Android users: for fullscreen open the web page in application such as Hermit</li>
+    <li>Apple iOS users: for fullscreen create link to this web page to homescreen, then simply run the newly created icon and it will open in Safari - fullscreen mode</li>
+
     <h3>Select currency you want to display:</h3>
     <div class="currencies">
         <a th:href="@{/day/USD/}"><img id="dollar" src="icons/dollar_small.png"/></a>
@@ -37,6 +42,7 @@
         For <strong>NIGHTMODE</strong> choose one of the following links:
         <li><a th:href="@{/night/USD/}">USD nightmode</a></li>
         <li><a th:href="@{/night/EUR/}">EUR nightmode</a></li>
+        <p>For some <strong>STATISTICS</strong> visit <a th:href="@{/stats}">STATS page</a></p>
     </div>
 
 </body>
