@@ -3,6 +3,12 @@ h1 {
     color: #BD7900;
 }
 
+#statsLink {
+    cursor: default;
+    text-decoration: none;
+    color: #BD7900;
+}
+
 .currencies {
     width: 100vw;
     height: 50vh;

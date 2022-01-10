@@ -1,5 +1,6 @@
 package com.example.einkbitcoinpriceticker.models;
 
+import com.example.einkbitcoinpriceticker.services.TimeService;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,6 @@ public class BitcoinPriceDTO {
     this.priceChangePercentage = priceChangePercentage;
     this.priceChangeSign = priceChangeSign;
     this.currency = currency;
-    this.lastUpdate = LocalDateTime.now();
+    this.lastUpdate = TimeService.getCurrentPragueTime();
   }
 }

@@ -3,6 +3,7 @@ package com.example.einkbitcoinpriceticker.controllers;
 import com.example.einkbitcoinpriceticker.models.BitcoinPriceDTO;
 import com.example.einkbitcoinpriceticker.models.UserIpEntity;
 import com.example.einkbitcoinpriceticker.services.PriceServiceImpl;
+import com.example.einkbitcoinpriceticker.services.TimeService;
 import com.example.einkbitcoinpriceticker.services.UserIpService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,7 +45,7 @@ public class PriceController {
       currency = "USD";
     }
 
-    userIpService.processUserIp(request.getRemoteAddr(),currency,(nightMode.equals("night")), LocalDateTime.now());
+    userIpService.processUserIp(request.getRemoteAddr(),currency,(nightMode.equals("night")), TimeService.getCurrentPragueTime());
 
     model.addAttribute("bitcoinObject", priceService.getPrice(currency));
     model.addAttribute("currency", currency);
@@ -76,7 +77,7 @@ public class PriceController {
     model.addAttribute("bitcoinObject", bitcoinPrice);
     model.addAttribute("currency", currency);
 
-    log.info("fragments refreshed on: "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    log.info("fragments refreshed on: "+ TimeService.getCurrentPragueTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
 
     if(nightMode.equals("night")) {
       return "pricePageNight :: #priceContainer";

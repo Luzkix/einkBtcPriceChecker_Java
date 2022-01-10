@@ -20,8 +20,6 @@ public class PriceServiceImpl implements PriceService {
   private BitcoinPriceDTO usdOldPrice = new BitcoinPriceDTO(0,0,"0,00","+","$");
   private BitcoinPriceDTO eurOldPrice = new BitcoinPriceDTO(0,0,"0,00","+","€");
 
-
-
   public BitcoinPriceDTO getPrice(String currency) {
     //if UPDATEINTERVAL was not exceeded yet, previous prices are returned
     if (currency.equals("USD") && calculateSecondsFromLastUpdate(currency) < UPDATEINTERVAL
@@ -52,8 +50,8 @@ public class PriceServiceImpl implements PriceService {
 
   private long calculateSecondsFromLastUpdate(String currency) {
     if (currency.equals("USD")) {
-      return ChronoUnit.SECONDS.between(usdOldPrice.getLastUpdate(), LocalDateTime.now());
-    } else return ChronoUnit.SECONDS.between(eurOldPrice.getLastUpdate(), LocalDateTime.now());
+      return ChronoUnit.SECONDS.between(usdOldPrice.getLastUpdate(), TimeService.getCurrentPragueTime());
+    } else return ChronoUnit.SECONDS.between(eurOldPrice.getLastUpdate(), TimeService.getCurrentPragueTime());
   }
 
   public BitcoinPriceDTO convertJsonToBitcoinPriceEntity(JSONObject json, String currency) {
@@ -80,7 +78,7 @@ public class PriceServiceImpl implements PriceService {
         currency = "€";
       } else currency = "$";
 
-      LocalDateTime lastUpdate = LocalDateTime.now();
+      LocalDateTime lastUpdate = TimeService.getCurrentPragueTime();
 
       return new BitcoinPriceDTO(actualPrice,priceChangeUSD,priceChangePercentage,
           priceChangeSign,currency,lastUpdate);
