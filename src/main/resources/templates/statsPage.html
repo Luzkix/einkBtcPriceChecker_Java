@@ -42,7 +42,7 @@
             </thead>
             <tbody>
             <tr th:each="ip:${iPlist}">
-                <td th:text="${ip.getUserIp()}"></td>
+                <td th:text="${ip.getUserIp().substring(0,ip.getUserIp().length()-1).concat('*')}"></td>
                 <td th:text="${ip.getCurrency()}"></td>
                 <td th:text="${ip.getNightMode()}"></td>
                 <td th:text="*{#temporals.format(ip.getLastPageRefresh(),'dd.MM.yyyy HH:mm')}"></td>
