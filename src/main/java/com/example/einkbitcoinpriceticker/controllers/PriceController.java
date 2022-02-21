@@ -57,6 +57,9 @@ public class PriceController {
 
   @GetMapping("/refresh/{nightMode}/{currency}/")
   String refreshPrice(@PathVariable String currency, @PathVariable String nightMode, Model model) {
+    //ipList is not used anyhow, it is just to keep the map alive
+    List<UserIpEntity> iPlist = userIpService.getIpList();
+
     //if unknown currency, set USD as default
     if(!currency.equals("USD") && !currency.equals("EUR")) {
       currency = "USD";

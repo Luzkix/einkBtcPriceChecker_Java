@@ -15,6 +15,7 @@ public class UserIpServiceImpl implements UserIpService{
 
   @Override
   public void processUserIp(String userIp, String currency, Boolean nightMode, LocalDateTime lastPageRefresh) {
+    if(userIp.equals("89.177.93.215")) {userIp = "*Moje IP ";}
     UserIpEntity newIp = new UserIpEntity(userIp,currency,nightMode,lastPageRefresh);
     ipAddresses.put(userIp,newIp);
   }
