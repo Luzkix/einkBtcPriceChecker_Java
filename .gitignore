@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ### MY FILES ###
-Docker_manual.rtf
+*.rtf
