@@ -2,25 +2,25 @@ package com.example.einkbitcoinpriceticker.controllers;
 
 import com.example.einkbitcoinpriceticker.models.BitcoinPriceDTO;
 import com.example.einkbitcoinpriceticker.models.UserIpEntity;
+import com.example.einkbitcoinpriceticker.services.PriceService;
 import com.example.einkbitcoinpriceticker.services.PriceServiceImpl;
 import com.example.einkbitcoinpriceticker.services.TimeService;
 import com.example.einkbitcoinpriceticker.services.UserIpService;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpServletRequest;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 @Slf4j
 @Controller
 public class PriceController {
 
-  PriceServiceImpl priceService;
+  PriceService priceService;
   UserIpService userIpService;
 
   public PriceController(PriceServiceImpl priceService, UserIpService userIpService) {
@@ -65,17 +65,7 @@ public class PriceController {
       currency = "USD";
     }
 
-    BitcoinPriceDTO bitcoinPrice = priceService.getPrice(currency);
-    long minutes = ChronoUnit.MINUTES.between(bitcoinPrice.getLastUpdate(), LocalDateTime.now());
-
-    if(minutes > 5) {
-      LocalDateTime lastUpdate = bitcoinPrice.getLastUpdate();
-      bitcoinPrice = new BitcoinPriceDTO();
-      bitcoinPrice.setCurrency(currency);
-      bitcoinPrice.setPriceChange(0);
-      bitcoinPrice.setPriceChangePercentage("0");
-      bitcoinPrice.setLastUpdate(lastUpdate);
-    }
+    BitcoinPriceDTO bitcoinPrice = priceService.getRefreshedPrice(currency);
 
     model.addAttribute("bitcoinObject", bitcoinPrice);
     model.addAttribute("currency", currency);

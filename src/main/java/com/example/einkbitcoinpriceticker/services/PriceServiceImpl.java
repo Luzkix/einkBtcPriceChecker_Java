@@ -88,4 +88,20 @@ public class PriceServiceImpl implements PriceService {
       return null;
     }
   }
+
+  public BitcoinPriceDTO getRefreshedPrice(String currency) {
+    BitcoinPriceDTO bitcoinPrice = getPrice(currency);
+    long minutes = ChronoUnit.MINUTES.between(bitcoinPrice.getLastUpdate(), LocalDateTime.now());
+
+    if(minutes > 5) {
+      LocalDateTime lastUpdate = bitcoinPrice.getLastUpdate();
+      bitcoinPrice = new BitcoinPriceDTO();
+      bitcoinPrice.setCurrency(currency);
+      bitcoinPrice.setPriceChange(0);
+      bitcoinPrice.setPriceChangePercentage("0");
+      bitcoinPrice.setLastUpdate(lastUpdate);
+    }
+
+    return bitcoinPrice;
+  }
 }
