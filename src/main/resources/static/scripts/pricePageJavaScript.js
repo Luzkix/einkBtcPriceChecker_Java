@@ -43,13 +43,6 @@ function getFreshBitcoinObject() {
         });
 }
 
-/*function getFreshBitcoinObject() {
-    //it also refreshes the fragment - it is sufficient in case I don´t need to deal with error
-    $.get("/refresh/"+nightmode+"/"+currency+"/").done(function(fragment) { // get from controller
-        $("#priceContainer").replaceWith(fragment); // update snippet of page
-    });
-}*/
-
 //refreshing page sections based on set interval
 function refreshPageValues() {
     var actualSec = new Date().getSeconds();

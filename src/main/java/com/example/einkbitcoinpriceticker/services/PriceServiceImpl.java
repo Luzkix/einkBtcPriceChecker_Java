@@ -1,11 +1,12 @@
 package com.example.einkbitcoinpriceticker.services;
 
 import com.example.einkbitcoinpriceticker.models.BitcoinPriceDTO;
+import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.json.JSONObject;
 
 @Slf4j
 @Service
