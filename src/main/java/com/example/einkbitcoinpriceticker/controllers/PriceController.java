@@ -1,11 +1,12 @@
 package com.example.einkbitcoinpriceticker.controllers;
 
+import com.example.einkbitcoinpriceticker.exceptionshandling.FetchingDataException;
 import com.example.einkbitcoinpriceticker.models.BitcoinPriceDTO;
-import com.example.einkbitcoinpriceticker.models.UserIpEntity;
+import com.example.einkbitcoinpriceticker.models.IpAddressEntity;
+import com.example.einkbitcoinpriceticker.services.IpAddressesService;
 import com.example.einkbitcoinpriceticker.services.PriceService;
-import com.example.einkbitcoinpriceticker.services.PriceServiceImpl;
 import com.example.einkbitcoinpriceticker.services.TimeService;
-import com.example.einkbitcoinpriceticker.services.UserIpService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,16 +18,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Slf4j
+@AllArgsConstructor
 @Controller
 public class PriceController {
 
   PriceService priceService;
-  UserIpService userIpService;
-
-  public PriceController(PriceServiceImpl priceService, UserIpService userIpService) {
-    this.priceService = priceService;
-    this.userIpService = userIpService;
-  }
+  IpAddressesService ipAddressesService;
 
   @GetMapping({"","/"})
   String displayHomepage(HttpServletRequest request) {
@@ -37,15 +34,16 @@ public class PriceController {
 
   @GetMapping("/{nightMode}/{currency}/")
   String displayPrice(@PathVariable String currency, @PathVariable String nightMode, Model model,
-                      HttpServletRequest request) {
-    log.info("Connected IP address: " + request.getRemoteAddr());
-
+                      HttpServletRequest request) throws FetchingDataException {
     //if unknown currency, set USD as default
     if(!currency.equals("USD") && !currency.equals("EUR")) {
       currency = "USD";
     }
 
-    userIpService.processUserIp(request.getRemoteAddr(),currency,(nightMode.equals("night")), TimeService.getCurrentPragueTime());
+    ipAddressesService.processIpAddress(request.getRemoteAddr(),currency,(nightMode.equals("night")), TimeService.getCurrentPragueTime());
+
+    log.info("Connected IP address: " + request.getRemoteAddr());
+    log.info("Total connected households: " + ipAddressesService.geAllActiveIpAddresses().size());
 
     model.addAttribute("bitcoinObject", priceService.getPrice(currency));
     model.addAttribute("currency", currency);
@@ -57,9 +55,6 @@ public class PriceController {
 
   @GetMapping("/refresh/{nightMode}/{currency}/")
   String refreshPrice(@PathVariable String currency, @PathVariable String nightMode, Model model) {
-    //shouting is just to keep the map alive (it is strange that it becomes empty after a while)
-    System.out.println("Connected households: " + userIpService.getIpList().size());
-
     //if unknown currency, set USD as default
     if(!currency.equals("USD") && !currency.equals("EUR")) {
       currency = "USD";
@@ -78,10 +73,15 @@ public class PriceController {
   }
 
   @GetMapping("/stats")
-  String showStats(Model model) {
-    List<UserIpEntity> iPlist = userIpService.getIpList();
-    model.addAttribute("iPlist", iPlist);
-    model.addAttribute("totalIps",iPlist.size());
+  String showStats(Model model) throws FetchingDataException{
+    List<IpAddressEntity> activeIpAdresses = ipAddressesService.geAllActiveIpAddresses();
+    List<IpAddressEntity> allIpAdresses = ipAddressesService.geAllIpAddresses();
+
+    model.addAttribute("activeIpAdresses", activeIpAdresses);
+    model.addAttribute("totalActiveConnections",activeIpAdresses.size());
+
+    model.addAttribute("allIpAdresses", allIpAdresses);
+    model.addAttribute("totalConnections",allIpAdresses.size());
 
     return "statsPage";
   }

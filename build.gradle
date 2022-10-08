@@ -2,9 +2,15 @@ plugins {
     id 'org.springframework.boot' version '2.2.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+
+    //Flyway plugin so that it can be run as gradle configuration
+    // note: plugin is required for creation of Gradle configuration in IntelliJ for lunching Flyway migrations
+    // it is also necessary to set into env.variables of this configuration following 4 varibles (directly, not into app.properties): FLYWAY_URL, FLYWAY_USER, FLYWAY_PASSWORD, FLYWAY_SCHEMAS
+    // then it is possible to run these migrations using created gradle configuration
+    id "org.flywaydb.flyway" version "9.4.0"
 }
 
-group = 'com.greenfoxacademy'
+group = 'com.luzarapps'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '8'
 
@@ -13,6 +19,7 @@ configurations {
     runtimeClasspath {
         extendsFrom developmentOnly
     }
+
 }
 
 repositories {
@@ -28,6 +35,10 @@ dependencies {
 
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly 'org.projectlombok:lombok'
+
+    //Postgres DB
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'junit:junit:4.12'
