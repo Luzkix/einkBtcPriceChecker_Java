@@ -19,7 +19,11 @@ public class IpAddressesServiceImpl implements IpAddressesService {
   @Override
   public IpAddressEntity processIpAddress(String ipAddress, String currency, Boolean nightMode, LocalDateTime lastPageRefresh)
           throws FetchingDataException {
-    if(ipAddress.equals("127.0.0.1") || ipAddress.equals("0:0:0:0:0:0:0:1")) {ipAddress = "*Zdendova domácí IP ";}
+
+    if(ipAddress.startsWith("127.0.") || ipAddress.startsWith("0") || ipAddress.startsWith("192.168.")
+            || ipAddress.equals("192.168.1.1")) {
+      ipAddress = "*Zdendovy domácí IP ";
+    }
 
     IpAddressEntity newIpAddress = new IpAddressEntity(ipAddress,currency,nightMode,lastPageRefresh);
     IpAddressEntity ipAddressFromDb;
