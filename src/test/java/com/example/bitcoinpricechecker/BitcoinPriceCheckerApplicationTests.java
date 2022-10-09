@@ -1,10 +1,10 @@
-package com.example.einkbitcoinpriceticker;
+package com.example.bitcoinpricechecker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EinkbitcoinpricetickerApplicationTests {
+class BitcoinPriceCheckerApplicationTests {
 
   @Test
   void contextLoads() {

@@ -1,4 +1,4 @@
-package com.example.einkbitcoinpriceticker.exceptionshandling;
+package com.example.bitcoinpricechecker.exceptionshandling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

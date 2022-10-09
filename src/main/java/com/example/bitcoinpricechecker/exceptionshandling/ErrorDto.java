@@ -1,4 +1,4 @@
-package com.example.einkbitcoinpriceticker.exceptionshandling;
+package com.example.bitcoinpricechecker.exceptionshandling;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

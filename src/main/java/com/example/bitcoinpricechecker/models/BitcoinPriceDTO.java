@@ -1,6 +1,6 @@
-package com.example.einkbitcoinpriceticker.models;
+package com.example.bitcoinpricechecker.models;
 
-import com.example.einkbitcoinpriceticker.services.TimeService;
+import com.example.bitcoinpricechecker.services.TimeService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

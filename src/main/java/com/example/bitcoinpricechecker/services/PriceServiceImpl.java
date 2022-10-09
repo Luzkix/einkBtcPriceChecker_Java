@@ -1,6 +1,6 @@
-package com.example.einkbitcoinpriceticker.services;
+package com.example.bitcoinpricechecker.services;
 
-import com.example.einkbitcoinpriceticker.models.BitcoinPriceDTO;
+import com.example.bitcoinpricechecker.models.BitcoinPriceDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;

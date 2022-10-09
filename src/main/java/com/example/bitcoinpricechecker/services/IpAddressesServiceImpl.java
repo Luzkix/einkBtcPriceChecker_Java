@@ -1,8 +1,8 @@
-package com.example.einkbitcoinpriceticker.services;
+package com.example.bitcoinpricechecker.services;
 
-import com.example.einkbitcoinpriceticker.exceptionshandling.FetchingDataException;
-import com.example.einkbitcoinpriceticker.models.IpAddressEntity;
-import com.example.einkbitcoinpriceticker.repositories.IpAddressesRepository;
+import com.example.bitcoinpricechecker.exceptionshandling.FetchingDataException;
+import com.example.bitcoinpricechecker.models.IpAddressEntity;
+import com.example.bitcoinpricechecker.repositories.IpAddressesRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,8 @@ public class IpAddressesServiceImpl implements IpAddressesService {
   public IpAddressEntity processIpAddress(String ipAddress, String currency, Boolean nightMode, LocalDateTime lastPageRefresh)
           throws FetchingDataException {
 
-    if(ipAddress.startsWith("127.0.") || ipAddress.startsWith("0") || ipAddress.startsWith("192.168.")
-            || ipAddress.equals("192.168.1.1")) {
-      ipAddress = "*Zdendovy domácí IP ";
+    if(ipAddress.startsWith("127.0.") || ipAddress.startsWith("0") || ipAddress.startsWith("192.168.")) {
+      ipAddress = "*Zdendova domácí IP ";
     }
 
     IpAddressEntity newIpAddress = new IpAddressEntity(ipAddress,currency,nightMode,lastPageRefresh);

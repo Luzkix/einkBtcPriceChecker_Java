@@ -1,4 +1,4 @@
-package com.example.einkbitcoinpriceticker.services;
+package com.example.bitcoinpricechecker.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.example.einkbitcoinpriceticker.models;
+package com.example.bitcoinpricechecker.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

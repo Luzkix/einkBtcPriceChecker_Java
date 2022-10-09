@@ -1,7 +1,7 @@
-package com.example.einkbitcoinpriceticker.services;
+package com.example.bitcoinpricechecker.services;
 
-import com.example.einkbitcoinpriceticker.exceptionshandling.FetchingDataException;
-import com.example.einkbitcoinpriceticker.models.IpAddressEntity;
+import com.example.bitcoinpricechecker.exceptionshandling.FetchingDataException;
+import com.example.bitcoinpricechecker.models.IpAddressEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;

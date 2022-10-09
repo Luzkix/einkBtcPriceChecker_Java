@@ -1,4 +1,4 @@
-package com.example.einkbitcoinpriceticker.exceptionshandling;
+package com.example.bitcoinpricechecker.exceptionshandling;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

@@ -1,11 +1,11 @@
-package com.example.einkbitcoinpriceticker.controllers;
+package com.example.bitcoinpricechecker.controllers;
 
-import com.example.einkbitcoinpriceticker.exceptionshandling.FetchingDataException;
-import com.example.einkbitcoinpriceticker.models.BitcoinPriceDTO;
-import com.example.einkbitcoinpriceticker.models.IpAddressEntity;
-import com.example.einkbitcoinpriceticker.services.IpAddressesService;
-import com.example.einkbitcoinpriceticker.services.PriceService;
-import com.example.einkbitcoinpriceticker.services.TimeService;
+import com.example.bitcoinpricechecker.exceptionshandling.FetchingDataException;
+import com.example.bitcoinpricechecker.models.BitcoinPriceDTO;
+import com.example.bitcoinpricechecker.models.IpAddressEntity;
+import com.example.bitcoinpricechecker.services.IpAddressesService;
+import com.example.bitcoinpricechecker.services.PriceService;
+import com.example.bitcoinpricechecker.services.TimeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

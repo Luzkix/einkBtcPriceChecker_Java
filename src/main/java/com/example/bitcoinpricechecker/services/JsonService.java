@@ -1,4 +1,4 @@
-package com.example.einkbitcoinpriceticker.services;
+package com.example.bitcoinpricechecker.services;
 
 import org.json.JSONObject;
 

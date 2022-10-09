@@ -1,4 +1,4 @@
-package com.example.einkbitcoinpriceticker.services;
+package com.example.bitcoinpricechecker.services;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
