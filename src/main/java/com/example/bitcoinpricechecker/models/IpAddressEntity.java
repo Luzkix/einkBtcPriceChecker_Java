@@ -22,12 +22,21 @@ public class IpAddressEntity {
     this.nightMode = nightMode;
     this.lastPageRefresh = lastPageRefresh;
   }
+  public IpAddressEntity(String ipAddress, String owner, String currency, Boolean nightMode, LocalDateTime lastPageRefresh){
+    this.ipAddress = ipAddress;
+    this.owner = owner;
+    this.currency = currency;
+    this.nightMode = nightMode;
+    this.lastPageRefresh = lastPageRefresh;
+  }
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @NotNull
   String ipAddress;
+
+  String owner = null;
   @NotNull
   String currency;
   @NotNull

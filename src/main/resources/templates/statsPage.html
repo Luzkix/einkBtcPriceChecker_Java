@@ -30,6 +30,7 @@
             <thead>
             <tr>
                 <th>IP address</th>
+                <th>Owner</th>
                 <th>Currency</th>
                 <th>Night mode</th>
                 <th>Last page refresh time (CET)</th>
@@ -37,7 +38,8 @@
             </thead>
             <tbody>
             <tr th:each="ip:${activeIpAdresses}">
-                <td th:text="${ip.getIpAddress().substring(0,ip.getIpAddress().length()-1).concat('*')}"></td>
+                <td th:text="${ip.getIpAddress().substring(0,ip.getIpAddress().indexOf('.',ip.getIpAddress().indexOf('.')+1)).concat('.*.*')}"></td>
+                <td th:text="${ip.getOwner()}"></td>
                 <td th:text="${ip.getCurrency()}"></td>
                 <td th:text="${ip.getNightMode()}"></td>
                 <td th:text="*{#temporals.format(ip.getLastPageRefresh(),'dd.MM.yyyy HH:mm')}"></td>
@@ -53,6 +55,7 @@
             <thead>
             <tr>
                 <th>IP address</th>
+                <th>Owner</th>
                 <th>Currency</th>
                 <th>Night mode</th>
                 <th>Last page refresh time (CET)</th>
@@ -60,7 +63,8 @@
             </thead>
             <tbody>
             <tr th:each="ip:${allIpAdresses}">
-                <td th:text="${ip.getIpAddress().substring(0,ip.getIpAddress().length()-1).concat('*')}"></td>
+                <td th:text="${ip.getIpAddress().substring(0,ip.getIpAddress().indexOf('.',ip.getIpAddress().indexOf('.')+1)).concat('.*.*')}"></td>
+                <td th:text="${ip.getOwner()}"></td>
                 <td th:text="${ip.getCurrency()}"></td>
                 <td th:text="${ip.getNightMode()}"></td>
                 <td th:text="*{#temporals.format(ip.getLastPageRefresh(),'dd.MM.yyyy HH:mm')}"></td>

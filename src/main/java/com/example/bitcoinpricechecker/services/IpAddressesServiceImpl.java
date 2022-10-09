@@ -20,11 +20,12 @@ public class IpAddressesServiceImpl implements IpAddressesService {
   public IpAddressEntity processIpAddress(String ipAddress, String currency, Boolean nightMode, LocalDateTime lastPageRefresh)
           throws FetchingDataException {
 
+    IpAddressEntity newIpAddress = new IpAddressEntity(ipAddress,currency,nightMode,lastPageRefresh);
+
     if(ipAddress.startsWith("127.0.") || ipAddress.startsWith("0") || ipAddress.startsWith("192.168.")) {
-      ipAddress = "*Zdendova domácí IP ";
+      newIpAddress.setOwner("Zdeněk - domov");
     }
 
-    IpAddressEntity newIpAddress = new IpAddressEntity(ipAddress,currency,nightMode,lastPageRefresh);
     IpAddressEntity ipAddressFromDb;
 
     try {
