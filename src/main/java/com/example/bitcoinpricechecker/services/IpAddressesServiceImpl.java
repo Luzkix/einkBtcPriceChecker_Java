@@ -8,6 +8,7 @@ import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class IpAddressesServiceImpl implements IpAddressesService {
 
     IpAddressEntity newIpAddress = new IpAddressEntity(ipAddress,currency,nightMode,lastPageRefresh);
 
-    if(ipAddress.startsWith("127.0.") || ipAddress.startsWith("0") || ipAddress.startsWith("192.168.")) {
+    if(ipAddress.startsWith("127.0.") || ipAddress.startsWith("0:") || ipAddress.startsWith("192.168.")) {
       newIpAddress.setOwner("Zdeněk - domov");
     }
 
@@ -48,6 +49,7 @@ public class IpAddressesServiceImpl implements IpAddressesService {
   public List<IpAddressEntity> geAllActiveIpAddresses() throws FetchingDataException {
     try {
       List<IpAddressEntity> ipAddresses = ipAddressesRepository.findAllActiveIpAddresses();
+      ipAddresses.sort(Comparator.comparing(IpAddressEntity::getLastPageRefresh).reversed());
       return ipAddresses;
     } catch (InvalidDataAccessResourceUsageException ex) {
       throw new FetchingDataException(ex.getMessage());
@@ -57,7 +59,9 @@ public class IpAddressesServiceImpl implements IpAddressesService {
   @Override
   public List<IpAddressEntity> geAllIpAddresses() throws FetchingDataException {
     try {
-      return ipAddressesRepository.findAll();
+      List<IpAddressEntity> ipAddresses = ipAddressesRepository.findAll();
+      ipAddresses.sort(Comparator.comparing(IpAddressEntity::getLastPageRefresh).reversed());
+      return ipAddresses;
     } catch (InvalidDataAccessResourceUsageException ex) {
       throw new FetchingDataException(ex.getMessage());
     }

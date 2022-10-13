@@ -27,7 +27,7 @@ public class PriceController {
 
   @GetMapping({"","/"})
   String displayHomepage(HttpServletRequest request) {
-    log.info("Connected IP address: " + request.getRemoteAddr());
+    System.out.println("Connected IP address: " + request.getRemoteAddr());
 
     return "homepage";
   }
@@ -65,7 +65,7 @@ public class PriceController {
     model.addAttribute("bitcoinObject", bitcoinPrice);
     model.addAttribute("currency", currency);
 
-    log.info("fragments refreshed on: "+ TimeService.getCurrentPragueTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    System.out.println("fragments refreshed on: "+ TimeService.getCurrentPragueTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
 
     if(nightMode.equals("night")) {
       return "pricePageNight :: #priceContainer";
