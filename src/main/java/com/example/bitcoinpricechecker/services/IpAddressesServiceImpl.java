@@ -26,6 +26,9 @@ public class IpAddressesServiceImpl implements IpAddressesService {
     if(ipAddress.startsWith("127.0.") || ipAddress.startsWith("0:") || ipAddress.startsWith("192.168.")) {
       newIpAddress.setOwner("Zdeněk - domov");
     }
+    if(ipAddress.startsWith("85.160.")) {
+      newIpAddress.setOwner("Brašin");
+    }
 
     IpAddressEntity ipAddressFromDb;
 
