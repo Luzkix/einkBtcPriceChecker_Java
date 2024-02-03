@@ -36,9 +36,7 @@ public class PriceController {
   String displayPrice(@PathVariable String currency, @PathVariable String nightMode, Model model,
                       HttpServletRequest request) throws FetchingDataException {
     //if unknown currency, set USD as default
-    if(!currency.equals("USD") && !currency.equals("EUR")) {
-      currency = "USD";
-    }
+    currency = currency.equals("USD") || currency.equals("EUR") ? currency : "USD";
 
     ipAddressesService.processIpAddress(request.getRemoteAddr(),currency,(nightMode.equals("night")), TimeService.getCurrentPragueTime());
 
@@ -56,9 +54,7 @@ public class PriceController {
   @GetMapping("/refresh/{nightMode}/{currency}/")
   String refreshPrice(@PathVariable String currency, @PathVariable String nightMode, Model model) {
     //if unknown currency, set USD as default
-    if(!currency.equals("USD") && !currency.equals("EUR")) {
-      currency = "USD";
-    }
+    currency = currency.equals("USD") || currency.equals("EUR") ? currency : "USD";
 
     BitcoinPriceDTO bitcoinPrice = priceService.getRefreshedPrice(currency);
 
