@@ -11,7 +11,7 @@ plugins {
 }
 
 group = 'com.luzarapps'
-version = '0.0.1-SNAPSHOT'
+version = 'latest'
 sourceCompatibility = '8'
 
 configurations {
