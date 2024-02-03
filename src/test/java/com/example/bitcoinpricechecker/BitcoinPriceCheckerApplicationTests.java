@@ -1,13 +1,13 @@
 package com.example.bitcoinpricechecker;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BitcoinPriceCheckerApplicationTests {
+public class BitcoinPriceCheckerApplicationTests {
 
   @Test
-  void contextLoads() {
+  public void contextLoads() {
   }
 
 }

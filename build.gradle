@@ -28,10 +28,11 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'junit:junit:4.12'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.json:json:20171018'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly 'org.projectlombok:lombok'
@@ -42,8 +43,8 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'junit:junit:4.12'
-    compile 'junit:junit:4.12'
     testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
+
 }
 
 test {
