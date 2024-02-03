@@ -1,5 +1,14 @@
 --DROP TABLE IF EXISTS ip_addresses;
-CREATE TABLE ip_addresses
+
+CREATE TABLE IF NOT EXISTS ip_addresses
+
+/*
+----------------------------------------------------------------------------------------------------
+* Table ip_addresses contains ip addresses and other details of users who have displayed Bitcoin Price Checker
+----------------------------------------------------------------------------------------------------
+* 2024-02-03 - zluzar - initial table creation
+----------------------------------------------------------------------------------------------------
+*/
 (
     id                      BIGSERIAL,
     ip_address              VARCHAR(100) NOT NULL,
