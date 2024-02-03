@@ -9,6 +9,7 @@ The idea was to build 'Bitcoin Price Checker' using various technologies even if
 
 ### Java Spring Boot version
 - Probably overkill, the goal was to practice Java and Spring Boot + Thymeleaf templates. Result is a Server-Side rendered web page, which is being auto-refreshed every x seconds. The project is hosted on my home NAS server.
+- Github page with source code of the application can be found here: https://github.com/Luzkix/einkBtcPriceChecker_Java
 
 ### DB SETUP
 - create Postgres DB (e.g. named "eink_btc_price_checker") with DB schema "btc"
@@ -35,7 +36,7 @@ The idea was to build 'Bitcoin Price Checker' using various technologies even if
     - sudo docker run \
         -d \
         --name bitcoinpricechecker \
-        -p 100:5800 \
+        -p 80:100 \
         -e DB_USERNAME="name" \
         -e DB_PWD="password" \
         -e DB_SERVER_IP="192.168.1.105" \
