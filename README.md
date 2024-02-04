@@ -27,21 +27,17 @@ The idea was to build 'Bitcoin Price Checker' using various technologies even if
 - Latest docker image of the app can be found here: https://hub.docker.com/r/luzkix/bitcoinpricechecker
 - Docker container internally uses port 100, which can't be changed by passing ENV variable. However, you can map different local port to this container using e.g. docker run command -p 80:100
 - Environmental variables - you need to pass following ENV variables to connect the application with your database:
-  - DB_USERNAME={yourDbUsername}
-  - DB_PWD={yourDbPassword}
-  - DB_SERVER_IP={yourDbServerIp}
-  - DB_PORT={yourDbPort}
-  - DB_NAME={databaseName}
-  - Final docker run command should look like this (just example):
+  - DB_USERNAME="{yourDbUsername}"
+  - DB_PWD="{yourDbPassword}"
+  - DB_URL="jdbc:postgresql://{dbServerIp}:{dbPort}/{dbName}"
+  - Final docker run command should look like this (just example, network=host and restart always are synology NAS specific, you dont need them generally):
     - sudo docker run \
         -d \
         --name bitcoinpricechecker \
         -p 80:100 \
         -e DB_USERNAME="name" \
         -e DB_PWD="password" \
-        -e DB_SERVER_IP="192.168.1.105" \
-        -e DB_PORT=5432 \
-        -e DB_NAME="eink_btc_price_checker" \
+        -e DB_URL="jdbc:postgresql://192.168.1.156:5432/eink_btc_price_checker" \
         --network=host \
         --restart always \
         luzkix/bitcoinpricechecker:latest
