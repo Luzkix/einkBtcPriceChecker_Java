@@ -28,26 +28,28 @@ function getFreshBitcoinObject() {
             {
                 $("#priceContainer").replaceWith(fragment); // update snippet of page
             },
-            error: function() //replacing individual sections with error message
+            error: function() //replacing individual sections with error message displayed to users directly on the screen in case something unexpected happens.
+                // The app is still working even if this error message is displayed and will recover by itself when connection to db server is reestablished.
             {
                 var error = "<span id='btcPrice'><strong>ERROR</strong></span>"
                 var btcCurrency = "<span id='btcCurrency'></span>"
                 var btcChange = "<span id='btcChange' style='color:#FAA31B; font-size: 13vh;'>LOST</span>"
-                var btcChangeBracelets = "<span id='btcChangeBracelets' style='color:#FAA31B; font-size: 13vh;'>CONNECTION</span>"
+                var btcChangePercentage = "<span id='btcChangePercentage' style='color:#FAA31B; font-size: 13vh;'>CONNECTION</span>"
 
                 $("#btcPrice").replaceWith(error);
                 $("#btcCurrency").replaceWith(btcCurrency);
                 $("#btcChange").replaceWith(btcChange);
-                $("#btcChangeBracelets").replaceWith(btcChangeBracelets);
+                $("#btcChangePercentage").replaceWith(btcChangePercentage);
             }
-        });
+        }
+        );
 }
 
-//refreshing page sections based on set interval
+//refreshing page sections based on set interval (by default refreshing values every 30 seconds)
 function refreshPageValues() {
     var actualSec = new Date().getSeconds();
     //console.log(actualSec);
-    if (actualSec == 0 || /*actualSec == 10|| actualSec == 20||*/ actualSec == 30 /*|| actualSec == 40|| actualSec == 50*/) {
+    if (actualSec == 0 || actualSec == 30 ) {
         getClock();
         getFreshBitcoinObject();
         console.log("fragments refreshed on: " + actualSec + "s");
@@ -55,7 +57,7 @@ function refreshPageValues() {
 }
 setInterval(refreshPageValues, 1000);
 
-// reload whole page once per X msec (actually 24 hours) so the page receives new code updates automatically
+// automatically reload whole page once per X msec (actually 24 hours) so the page receives new code updates automatically, without user intervention.
 setTimeout(function() {
     window.location.reload(false);
 }, 86400000);

@@ -45,7 +45,7 @@
                 <span id="btcChange" th:style="*{priceChangeSign == '+' ? 'color:limegreen' : 'color:#FAA31B'}"
                       th:utext="*{priceChangeSign == '+' ? '▲' : '▼'}
                       + *{#numbers.formatInteger(priceChange,0, 'NONE')} +'' + *{currency}"/>
-                <span id="btcChangeBracelets" th:style="*{priceChangeSign == '+' ? 'color:limegreen' : 'color:#FAA31B'}"
+                <span id="btcChangePercentage" th:style="*{priceChangeSign == '+' ? 'color:limegreen' : 'color:#FAA31B'}"
                       th:utext="*{priceChangeSign == '+' ? '▲' : '▼'}
                       + *{priceChangePercentage} + '%'"/>
             </div>
