@@ -1,4 +1,4 @@
-package com.example.bitcoinpricechecker.controllers;
+package com.example.bitcoinpricechecker.controllers.mvc;
 
 import com.example.bitcoinpricechecker.exceptionshandling.FetchingDataException;
 import com.example.bitcoinpricechecker.models.BitcoinPriceDTO;
@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @Controller
-public class PriceController {
+public class HomeMvcController {
 
   PriceService priceService;
   IpAddressesService ipAddressesService;

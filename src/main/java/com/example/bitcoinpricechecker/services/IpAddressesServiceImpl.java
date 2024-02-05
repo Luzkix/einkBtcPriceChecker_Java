@@ -44,7 +44,8 @@ public class IpAddressesServiceImpl implements IpAddressesService {
       ipAddressFromDb.setCurrency(currency);
       ipAddressFromDb.setNightMode(nightMode);
       ipAddressFromDb.setLastPageRefresh(lastPageRefresh);
-      return ipAddressesRepository.save(ipAddressFromDb);
+      ipAddressesRepository.save(ipAddressFromDb);
+      return ipAddressFromDb;
     }
   }
 
