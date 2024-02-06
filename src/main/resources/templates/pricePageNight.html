@@ -36,23 +36,26 @@
             <img id=btcText src="/icons/BTCtext.png">
         </div>
 
-        <div class="priceContainer" id="priceContainer" th:object="${bitcoinObject}">
-            <div class="btcPriceBlock">
-                <span id="btcPrice" th:utext="'<strong>' + *{#numbers.formatInteger(actualPrice,0, 'COMMA')} + '</strong>'"></span>
-                <span id="btcCurrency" th:utext="'<strong>' + *{currency} + '</strong>'"></span>
-            </div>
-            <div class="btcChangeBlock">
+        <div id="fragmentWrapper">
+            <div class="priceContainer" id="priceContainer" th:object="${bitcoinObject}">
+                <div class="btcPriceBlock">
+                    <span id="btcPrice" th:utext="'<strong>' + *{#numbers.formatInteger(actualPrice,0, 'COMMA')} + '</strong>'"></span>
+                    <span id="btcCurrency" th:utext="'<strong>' + *{currency} + '</strong>'"></span>
+                </div>
+                <div class="btcChangeBlock">
                 <span id="btcChange" th:style="*{priceChangeSign == '+' ? 'color:limegreen' : 'color:#FAA31B'}"
                       th:utext="*{priceChangeSign == '+' ? '▲' : '▼'}
                       + *{#numbers.formatInteger(priceChange,0, 'NONE')} +'' + *{currency}"/>
-                <span id="btcChangePercentage" th:style="*{priceChangeSign == '+' ? 'color:limegreen' : 'color:#FAA31B'}"
-                      th:utext="*{priceChangeSign == '+' ? '▲' : '▼'}
+                    <span id="btcChangePercentage" th:style="*{priceChangeSign == '+' ? 'color:limegreen' : 'color:#FAA31B'}"
+                          th:utext="*{priceChangeSign == '+' ? '▲' : '▼'}
                       + *{priceChangePercentage} + '%'"/>
-            </div>
-            <div class="lastUpdatelock">
-                <span id="lastUpdate" th:text="'Last price info: '+*{#temporals.format(lastUpdate,'HH:mm:ss')+' CET'}"></span>
+                </div>
+                <div class="lastUpdateBlock">
+                    <span id="lastUpdate" th:text="'Last price info: '+*{#temporals.format(lastUpdate,'HH:mm:ss')+' CET'}"></span>
+                </div>
             </div>
         </div>
+
 
     </div>
 

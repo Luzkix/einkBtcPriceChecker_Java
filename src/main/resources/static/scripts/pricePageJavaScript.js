@@ -52,8 +52,11 @@ function refreshPageValues() {
     if (actualSec == 0 || actualSec == 30 ) {
         getClock();
         getFreshBitcoinObject();
+
         console.log("fragments refreshed on: " + actualSec + "s");
+
     }
+
 }
 setInterval(refreshPageValues, 1000);
 
@@ -61,3 +64,37 @@ setInterval(refreshPageValues, 1000);
 setTimeout(function() {
     window.location.reload(false);
 }, 86400000);
+
+
+// Dynamically adjust font size for bitcoin price to its maximum
+// (e.g. make it smaller or bigger based on the length of the number and available screen space)
+const fragmentWrapper = document.getElementById('fragmentWrapper');
+const observer = new MutationObserver(setMaxFontSize);
+
+observer.observe(fragmentWrapper, {
+    childList: true
+});
+
+function setMaxFontSize() {
+
+    const btcPriceId = fragmentWrapper.querySelector('#btcPrice');
+    const btcPriceClass = document.getElementsByClassName('btcPriceBlock').item(0);
+
+    // Get text length and width
+    const text = btcPriceId.innerText;
+    const len = text.length + 1; //+1 stands for $ sign
+    const width = 100;
+
+    // Calculate max font size
+    const charWidth = 0.62;
+    const maxFontSize = width / (len * charWidth);
+
+    // Set btcPriceClassElement font size in vw units
+    btcPriceClass.style.fontSize = maxFontSize + "vw";
+
+
+}
+// Set initial max font size when page loads
+setMaxFontSize();
+
+

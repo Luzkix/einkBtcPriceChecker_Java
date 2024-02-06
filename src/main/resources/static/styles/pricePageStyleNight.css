@@ -43,8 +43,6 @@ body {
     margin-right: 0;
     font-size: 14vh;
     font-weight: bold;
-/*    color: cornsilk;
-    color: #AAABAB;*/
     color: #6B6C6C;
 
     display: inline-flex;
@@ -74,7 +72,7 @@ body {
 
 .priceContainer {
     width: 100vw;
-    height: 65vh;
+    height: 70vh;
     margin: 0px;
     padding: 0vh;
     align-items: center;
@@ -82,32 +80,31 @@ body {
 
 .btcPriceBlock {
     width: 100vw;
-    height: 40vh;
+    height: 45vh;
     padding: 0vh;
     display: inline-flex;
     align-items: center;
-    margin-top: 2vh;
-    margin-bottom: 3vh;
+    margin-top: 0vh;
+    margin-bottom: 0vh;
 }
 
 #btcPrice {
     padding: 0vh 0vw 0vh 0vw;
     margin: 0;
     margin-left: auto;
-    font-size: 33vh;
-/*    color: cornsilk;
-    color: khaki;*/
     color: #e7dfc6;
+
+    display: inline-block;
 }
 
 #btcCurrency {
     padding: 0vh 0vw 0vh 0vw;
     margin: 0;
     margin-right: auto;
-    font-size: 33vh;
     color: cornsilk;
-/*    color: #AAABAB;*/
     color: #6B6C6C;
+
+    display: inline-block;
 }
 
 .btcChangeBlock {
@@ -116,8 +113,6 @@ body {
     padding: 0vh;
     display: inline-flex;
     align-items: center;
-    text-align: center;
-    vertical-align: middle;
     justify-content: space-between;
 }
 
@@ -149,7 +144,7 @@ body {
     vertical-align: middle;
 }
 
-.lastUpdatelock {
+.lastUpdateBlock {
     width: 100vw;
     height: 4vh;
     margin: 0px;
@@ -160,13 +155,31 @@ body {
 
 #lastUpdate {
     padding: 0vh 2vw 0vh 0vw;
-    margin: 0;
-    margin-left: auto;
-    margin-right: 0;
+    margin: 0 0 0 auto;
     font-size: 3vh;
     color: #292929;
 
     display: inline-flex;
     align-items: center;
     text-align: end;
+}
+
+
+/* Adjustments for wider screens like mobile phones */
+@media (min-aspect-ratio: 16/8) {
+    /* Hide .btcTextBlock on wider screens and save 15vh space */
+    .btcTextBlock {
+        display: none;
+    }
+    /* Add 15vh space gained from hiding .btcTextBlock to relevant containers */
+    .btcPriceContainer {
+        height: 85vh;
+    }
+    .btcPriceBlock {
+        height: 60vh;
+    }
+    .lastUpdateBlock {
+        /* shift text slightly down into the phone´s borders */
+        transform: translateY(2vh);
+    }
 }
