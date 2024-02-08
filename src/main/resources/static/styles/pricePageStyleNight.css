@@ -1,183 +1,30 @@
-body {
-    font-family: 'Abril Fatface', cursive;
-    margin: 0px;
-    padding: 0px;
+@import 'pricePageStyle.css';
 
-    max-width: 1000px;
-    width: 100vw;
-    height: 100vh;
-
-    /*display: flex;*/
-    justify-content: center; /*horizontální vystředění*/
-    align-items: center; /*vertikální vystředění*/
-}
 
 .background {
-    width: 100vw;
-    height: 100vh;
-    margin: 0px;
-    padding: 0px;
-
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
     background-color: black;
-
-    box-shadow: inset 0 0 0 10px #FAA31B;
-}
-
-.clockBlock {
-    width: 100vw;
-    height: 15vh;
-    margin: 0px;
-    padding: 0vh;
-    display: inline-flex;
-    align-items: center;
 }
 
 #clock {
-    padding-top: 5vh;
-    padding-right: 3vw;
-    margin: 0;
-    margin-left: auto;
-    margin-right: 0;
-    font-size: 14vh;
-    font-weight: bold;
     color: #6B6C6C;
-
-    display: inline-flex;
-    align-items: center;
-    text-align: end;
-}
-
-.btcTextBlock {
-    width: 100vw;
-    height: 15vh;
-    margin: 0px;
-    padding: 0vh 0vw 0vh 4vw;
-    display: inline-flex;
-    align-items: center;
-}
-
-#btcText {
-    width: auto;
-    height: 100%;
-
-    margin-left: 0; /*horizontální vystředění*/
-    margin-right: auto; /*horizontální vystředění*/
-
-    display: inline-flex;
-    align-items: center;
-}
-
-.priceContainer {
-    width: 100vw;
-    height: 70vh;
-    margin: 0px;
-    padding: 0vh;
-    align-items: center;
-}
-
-.btcPriceBlock {
-    width: 100vw;
-    height: 45vh;
-    padding: 0vh;
-    display: inline-flex;
-    align-items: center;
-    margin-top: 0vh;
-    margin-bottom: 0vh;
 }
 
 #btcPrice {
-    padding: 0vh 0vw 0vh 0vw;
-    margin: 0;
-    margin-left: auto;
     color: #e7dfc6;
-
-    display: inline-block;
 }
 
 #btcCurrency {
-    padding: 0vh 0vw 0vh 0vw;
-    margin: 0;
-    margin-right: auto;
     color: cornsilk;
     color: #6B6C6C;
-
-    display: inline-block;
-}
-
-.btcChangeBlock {
-    width: 100vw;
-    height: 17vh;
-    padding: 0vh;
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#btcChange {
-    padding: 0vh 0vw 0vh 0vw;
-    margin: 0;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 15vh;
-    font-weight: bold;
-
-    display: inline;
-    align-items: center;
-    text-align: center;
-    vertical-align: middle;
-}
-
-#btcChangePercentage {
-    padding: 0vh 0vw 0vh 0vw;
-    margin: 0;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 15vh;
-    font-weight: bold;
-
-    display: inline;
-    align-items: center;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.lastUpdateBlock {
-    width: 100vw;
-    height: 4vh;
-    margin: 0px;
-    padding: 0vh 0vw 0vh 0vw;
-    display: inline-flex;
-    align-items: center;
 }
 
 #lastUpdate {
-    padding: 0vh 2vw 0vh 0vw;
-    margin: 0 0 0 auto;
-    font-size: 3vh;
     color: #292929;
-
-    display: inline-flex;
-    align-items: center;
-    text-align: end;
 }
 
 
 /* Adjustments for wider screens like mobile phones */
 @media (min-aspect-ratio: 16/8) {
-    /* Hide .btcTextBlock on wider screens and save 15vh space */
-    .btcTextBlock {
-        display: none;
-    }
-    /* Add 15vh space gained from hiding .btcTextBlock to relevant containers */
-    .btcPriceContainer {
-        height: 85vh;
-    }
-    .btcPriceBlock {
-        height: 60vh;
-    }
     .lastUpdateBlock {
         /* shift text slightly down into the phone´s borders */
         transform: translateY(2vh);
