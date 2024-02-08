@@ -5,9 +5,9 @@ This miniproject is about building easy to use application/webpage which shows a
 The idea was to build 'Bitcoin Price Checker' using various technologies even if the technology itself might be not most suitable for this kind of simple app (e.g. overkill). However, ultimate goal was to practice and learn these technologies.
 
 
-## APP versions
+## APP Desc
 
-### Java Spring Boot version
+### Java Spring Boot
 - Probably overkill, the goal was to practice Java and Spring Boot + Thymeleaf templates. Result is a Server-Side rendered web page, which is being auto-refreshed every x seconds. The project is hosted on my home NAS server.
 - Github page with source code of the application can be found here: https://github.com/Luzkix/einkBtcPriceChecker_Java
 
