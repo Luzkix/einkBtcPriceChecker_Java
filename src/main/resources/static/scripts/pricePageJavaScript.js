@@ -14,7 +14,6 @@ getClock();
 // getting fresh th:object "bitcoinObject" for refreshing priceContainer fragment
 url = $(location).attr('href');
 urlParts = url.split("/");
-var nightmode = urlParts[urlParts.length-3];
 var currency = urlParts[urlParts.length-2];
 
 function getFreshBitcoinObject() {
@@ -23,7 +22,7 @@ function getFreshBitcoinObject() {
             type: "GET",
             data: $("#priceContainer"),
             cache: false,
-            url: "/refresh/"+nightmode+"/"+currency+"/",
+            url: "/refresh/"+currency+"/",
             success: function(fragment)
             {
                 $("#priceContainer").replaceWith(fragment); // update snippet of page

@@ -15,13 +15,13 @@
     <!-- Bootstrap CSS -->
 
     <!-- Own CSS -->
-    <link rel="stylesheet" th:href="@{/styles/pricePageStyle.css}"/>
+    <link rel="stylesheet" th:href="${nightMode} ? @{/styles/pricePageStyleNight.css} : @{/styles/pricePageStyle.css}"/>
 
     <!-- jQuerry script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <!-- Page Title -->
-    <title th:utext="${currency} + ' Bitcoin price checker'"></title>
+    <title th:utext="${nightMode} ? ${currency} + ' Bitcoin price checker - NightMode' : ${currency} + ' Bitcoin price checker'"></title>
 
 </head>
 

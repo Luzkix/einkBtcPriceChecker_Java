@@ -45,14 +45,13 @@ public class HomeMvcController {
 
     model.addAttribute("bitcoinObject", priceService.getPrice(currency));
     model.addAttribute("currency", currency);
+    model.addAttribute("nightMode", nightMode.equals("night"));
 
-    if(nightMode.equals("night")) {
-      return "pricePageNight";
-    } else return "pricePage";
+    return "pricePage";
   }
 
-  @GetMapping("/refresh/{nightMode}/{currency}/")
-  String refreshPrice(@PathVariable String currency, @PathVariable String nightMode, Model model) {
+  @GetMapping("/refresh/{currency}/")
+  String refreshPrice(@PathVariable String currency, Model model) {
     //if unknown currency, set USD as default
     currency = currency.equals("USD") || currency.equals("EUR") ? currency : "USD";
 
@@ -63,9 +62,7 @@ public class HomeMvcController {
 
     System.out.println("fragments refreshed on: "+ TimeService.getCurrentPragueTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
 
-    if(nightMode.equals("night")) {
-      return "pricePageNight :: #priceContainer";
-    } else return "pricePage :: #priceContainer";
+    return "pricePage :: #priceContainer";
   }
 
   @GetMapping("/stats")
