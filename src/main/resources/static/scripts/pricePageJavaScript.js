@@ -47,12 +47,12 @@ function getFreshBitcoinObject() {
 //refreshing page sections based on set interval (by default refreshing values every 30 seconds)
 function refreshPageValues() {
     var actualSec = new Date().getSeconds();
-    //console.log(actualSec);
+
     if (actualSec == 0 || actualSec == 30 ) {
         getClock();
         getFreshBitcoinObject();
 
-        console.log("fragments refreshed on: " + actualSec + "s");
+        console.log("Page refreshed on: " + actualSec + "s");
 
     }
 
@@ -85,7 +85,7 @@ function setMaxFontSize() {
     const width = 100;
 
     // Calculate max font size
-    const charWidth = 0.62;
+    const charWidth = 0.59; //just a guess to get largest font-size for my font type
     const maxFontSize = width / (len * charWidth);
 
     // Set btcPriceClassElement font size in vw units

@@ -11,21 +11,22 @@ import java.time.temporal.ChronoUnit;
 @Slf4j
 @Service
 public class PriceServiceImpl implements PriceService {
+  private final static int PRICEUPDATEINTERVAL = 10;
+
   private JsonService jsonService;
 
   public PriceServiceImpl(JsonService jsonService) {
     this.jsonService = jsonService;
   }
 
-  private final int UPDATEINTERVAL = 10;
   private BitcoinPriceDTO usdOldPrice = new BitcoinPriceDTO(0,0,"0,00","+","$");
   private BitcoinPriceDTO eurOldPrice = new BitcoinPriceDTO(0,0,"0,00","+","€");
 
   public BitcoinPriceDTO getPrice(String currency) {
-    //if UPDATEINTERVAL was not exceeded yet, previous prices are returned
-    if (currency.equals("USD") && calculateSecondsFromLastUpdate(currency) < UPDATEINTERVAL
+    //if PRICEUPDATEINTERVAL was not exceeded yet, previous prices are returned
+    if (currency.equals("USD") && calculateSecondsFromLastUpdate(currency) < PRICEUPDATEINTERVAL
         && usdOldPrice.getActualPrice() != 0) return usdOldPrice;
-    if (currency.equals("EUR") && calculateSecondsFromLastUpdate(currency) < UPDATEINTERVAL
+    if (currency.equals("EUR") && calculateSecondsFromLastUpdate(currency) < PRICEUPDATEINTERVAL
         && eurOldPrice.getActualPrice() != 0) return eurOldPrice;
 
     //get new json from Coinbase API
@@ -33,6 +34,7 @@ public class PriceServiceImpl implements PriceService {
 
     //Convert json to the bitcoin price model
     BitcoinPriceDTO bitcoinNewPrice = convertJsonToBitcoinPriceEntity(json, currency);
+
     if (bitcoinNewPrice == null) {
       log.error("New bitcoin price could not be retrieved from Coinbase - old value is displayed instead");
       if (currency.equals("USD")) {
@@ -105,4 +107,5 @@ public class PriceServiceImpl implements PriceService {
 
     return bitcoinPrice;
   }
+
 }

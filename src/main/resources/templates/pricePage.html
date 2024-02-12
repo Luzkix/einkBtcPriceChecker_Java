@@ -41,11 +41,11 @@
                     <span id="btcPrice" th:utext="'<strong>' + *{#numbers.formatInteger(actualPrice,0, 'COMMA')} + '</strong>'"></span>
                     <span id="btcCurrency" th:utext="'<strong>' + *{currency} + '</strong>'"></span>
                 </div>
-                <div class="btcChangeBlock">
-                    <span id="btcChange" th:style="*{priceChangeSign == '+' ? 'color:limegreen' : 'color:#FAA31B'}"
+                <div class="btcChangeBlock" th:id="*{priceChangeSign == '+' ? 'price-up' : 'price-down'}">
+                    <span id="btcChange"
                           th:utext="*{priceChangeSign == '+' ? '▲' : '▼'}
                           + *{#numbers.formatInteger(priceChange,0, 'NONE')} +'' + *{currency}"/>
-                    <span id="btcChangePercentage" th:style="*{priceChangeSign == '+' ? 'color:limegreen' : 'color:#FAA31B'}"
+                    <span id="btcChangePercentage"
                           th:utext="*{priceChangeSign == '+' ? '▲' : '▼'}
                           + *{priceChangePercentage} + '%'"/>
                 </div>

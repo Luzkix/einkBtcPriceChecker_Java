@@ -46,7 +46,8 @@ public class JsonServiceImpl implements JsonService {
 
         //Parse the string into a json object
         JSONObject jsonObject = new JSONObject(content.toString());
-        System.out.println("Latest price data :" + jsonObject);
+
+        //System.out.println("Latest price data :" + jsonObject);
 
         return jsonObject;
       }

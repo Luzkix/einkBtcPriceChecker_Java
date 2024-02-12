@@ -86,6 +86,14 @@ body {
     margin-bottom: 0vh;
 }
 
+#price-up {
+    color: limegreen;
+}
+
+#price-down {
+    color: #FAA31B;
+}
+
 #btcPrice {
     padding: 0vh 0vw 0vh 0vw;
     margin: 0;
