@@ -22,8 +22,8 @@ import java.util.List;
 @Controller
 public class HomeMvcController {
 
-  PriceService priceService;
-  IpAddressesService ipAddressesService;
+  private PriceService priceService;
+  private IpAddressesService ipAddressesService;
 
   @GetMapping({"","/"})
   String displayHomepage(HttpServletRequest request) {
