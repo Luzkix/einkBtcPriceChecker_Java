@@ -27,7 +27,6 @@ function getFreshBitcoinObject() {
             {
                 // Extract the bitcoinObject value from the fragment
                 var btcErrorPrice = $(fragment).find("#btcErrorPrice").val();
-                console.log("btcErrorPrice: " + btcErrorPrice);
 
                 if (btcErrorPrice == -999999) {
                     // update snippet of page with error message
