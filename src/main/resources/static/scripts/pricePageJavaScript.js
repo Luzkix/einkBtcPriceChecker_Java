@@ -25,7 +25,26 @@ function getFreshBitcoinObject() {
             url: "/refresh/"+currency+"/",
             success: function(fragment)
             {
-                $("#priceContainer").replaceWith(fragment); // update snippet of page
+                // Extract the bitcoinObject value from the fragment
+                var btcErrorPrice = $(fragment).find("#btcErrorPrice").val();
+                console.log("btcErrorPrice: " + btcErrorPrice);
+
+                if (btcErrorPrice == -999999) {
+                    // update snippet of page with error message
+                    var error = "<span id='btcPrice'><strong>ERROR</strong></span>"
+                    var btcCurrency = "<span id='btcCurrency'></span>"
+                    var btcChange = "<span id='btcChange' style='color:#FAA31B; font-size: 13vh;'>COINBASE</span>"
+                    var btcChangePercentage = "<span id='btcChangePercentage' style='color:#FAA31B; font-size: 13vh;'>API</span>"
+
+                    $("#btcPrice").replaceWith(error);
+                    $("#btcCurrency").replaceWith(btcCurrency);
+                    $("#btcChange").replaceWith(btcChange);
+                    $("#btcChangePercentage").replaceWith(btcChangePercentage);
+
+                } else {
+                    // update snippet of page with actual price
+                    $("#priceContainer").replaceWith(fragment);
+                }
             },
             error: function() //replacing individual sections with error message displayed to users directly on the screen in case something unexpected happens.
                 // The app is still working even if this error message is displayed and will recover by itself when connection to db server is reestablished.

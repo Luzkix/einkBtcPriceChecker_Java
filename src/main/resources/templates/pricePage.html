@@ -37,6 +37,9 @@
         </div>
         <div id="fragmentWrapper">
             <div class="priceContainer" id="priceContainer" th:object="${bitcoinObject}">
+                <!-- hidden input 'btcErrorPrice' serves only for purpose of reading error price in jquerry getFreshBitcoinObject() function which refreshes price fragment  -->
+                <input type="hidden" id="btcErrorPrice" th:value="${bitcoinObject.actualPrice}" />
+
                 <div class="btcPriceBlock">
                     <span id="btcPrice" th:utext="'<strong>' + *{#numbers.formatInteger(actualPrice,0, 'COMMA')} + '</strong>'"></span>
                     <span id="btcCurrency" th:utext="'<strong>' + *{currency} + '</strong>'"></span>

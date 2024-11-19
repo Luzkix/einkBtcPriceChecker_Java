@@ -30,7 +30,12 @@ public class PriceServiceImpl implements PriceService {
         && eurOldPrice.getActualPrice() != 0) return eurOldPrice;
 
     //get new json from Coinbase API
-    JSONObject json = jsonService.getJson(currency);
+    JSONObject json = null;
+    try {
+      json = jsonService.getJson(currency);
+    } catch (Exception e) {
+      //e.printStackTrace(); //zatím nemám rozmyšleno, co by se mělo s exceptionou udělat
+    }
 
     //Convert json to the bitcoin price model
     BitcoinPriceDTO bitcoinNewPrice = convertJsonToBitcoinPriceEntity(json, currency);
@@ -59,8 +64,17 @@ public class PriceServiceImpl implements PriceService {
 
   public BitcoinPriceDTO convertJsonToBitcoinPriceEntity(JSONObject json, String currency) {
     try {
-      String open = json.getString("open");
-      String last = json.getString("last");
+      String open;
+      String last;
+
+      //pokud je json null, znamená to problém s coinbase API. Setuju pak umělou cenu, dle které se na frontendu rozhodne, co bude zobrazeno.
+      if(json != null) {
+        open = json.getString("open");
+        last = json.getString("last");
+      } else {
+        open = "-999999";
+        last = "-999999";
+      }
 
       int yesterdayPrice = (int)(Double.parseDouble(open));
       int actualPrice = (int)(Double.parseDouble(last));
