@@ -10,7 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 
 @Slf4j
 @Service
@@ -19,9 +19,7 @@ public class JsonServiceImpl implements JsonService {
   @Override
   public JSONObject getJson(String currency) throws CoinbaseApiException, IOException {
 
-    URL url = new URL("https://api.exchange.coinbase.com/products/BTC-"+currency+"/stats");
-
-    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    HttpURLConnection conn = (HttpURLConnection) URI.create("https://api.exchange.coinbase.com/products/BTC-"+currency+"/stats").toURL().openConnection();
     conn.setRequestProperty("User-Agent", "Mozilla/5.0");
     conn.setRequestProperty("Cache-Control","no-cache");
     conn.setRequestProperty("Cookie","coinbase_device_id=11406e7e-93f9-4418-b006-5ccd57d3b348");
@@ -34,8 +32,9 @@ public class JsonServiceImpl implements JsonService {
     int responsecode = conn.getResponseCode();
 
     if (responsecode != 200) {
+      var requestUrl = conn.getURL();
       log.info("Wrong HttpResponseCode from Coinbase: " + HttpStatus.valueOf(responsecode) +
-              ", URL: GET " + url.getProtocol() + "://" + url.getHost() + url.getPath());
+              ", URL: GET " + requestUrl.getProtocol() + "://" + requestUrl.getHost() + requestUrl.getPath());
       throw new CoinbaseApiException("Wrong HttpResponseCode from Coinbase: " + responsecode);
     } else {
       BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));

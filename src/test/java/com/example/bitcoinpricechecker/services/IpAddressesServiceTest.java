@@ -3,22 +3,23 @@ package com.example.bitcoinpricechecker.services;
 import com.example.bitcoinpricechecker.exceptionshandling.FetchingDataException;
 import com.example.bitcoinpricechecker.models.IpAddressEntity;
 import com.example.bitcoinpricechecker.repositories.IpAddressesRepository;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 @SpringBootTest
 public class IpAddressesServiceTest {
     private IpAddressesRepository ipAddressesRepository;
     private IpAddressesServiceImpl ipService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         ipAddressesRepository = Mockito.mock(IpAddressesRepository.class);
         ipService = Mockito.spy(new IpAddressesServiceImpl(ipAddressesRepository));
@@ -46,13 +47,14 @@ public class IpAddressesServiceTest {
         verify(ipService).processIpAddress(ipAddress, currency, nightMode, lastRefresh);
     }
 
-    @Test(expected = FetchingDataException.class)
-    public void testProcessIpAddress_throwsException() throws FetchingDataException {
+    @Test
+    public void testProcessIpAddress_throwsException() {
         String ipAddress = "127.0.0.1";
 
         when(ipAddressesRepository.findByIpAddress(ipAddress))
                 .thenThrow(new InvalidDataAccessResourceUsageException("Invalid IP"));
 
-        ipService.processIpAddress(ipAddress, "USD", false, LocalDateTime.now());
+        assertThrows(FetchingDataException.class, () ->
+                ipService.processIpAddress(ipAddress, "USD", false, LocalDateTime.now()));
     }
 }
