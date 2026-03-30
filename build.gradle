@@ -1,25 +1,27 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.5.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id 'java'
+id 'org.springframework.boot' version '3.4.4'
+id 'io.spring.dependency-management' version '1.1.7'
+id 'java'
 
-    //Flyway plugin so that it can be run as gradle configuration
-    // note: plugin is required for creation of Gradle configuration in IntelliJ for lunching Flyway migrations
-    // it is also necessary to set into env.variables of this configuration following 4 varibles (directly, not into app.properties): FLYWAY_URL, FLYWAY_USER, FLYWAY_PASSWORD, FLYWAY_SCHEMAS
-    // then it is possible to run these migrations using created gradle configuration
-    id "org.flywaydb.flyway" version "9.4.0"
+//Flyway plugin so that it can be run as gradle configuration
+// note: plugin is required for creation of Gradle configuration in IntelliJ for lunching Flyway migrations
+// it is also necessary to set into env.variables of this configuration following 4 varibles (directly, not into app.properties): FLYWAY_URL, FLYWAY_USER, FLYWAY_PASSWORD, FLYWAY_SCHEMAS
+// then it is possible to run these migrations using created gradle configuration
+id "org.flywaydb.flyway" version "11.8.0"
 }
 
-group = 'com.luzarapps'
+group = 'com.example'
 version = 'latest'
-sourceCompatibility = '8'
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
 
 configurations {
     developmentOnly
     runtimeClasspath {
         extendsFrom developmentOnly
     }
-
 }
 
 repositories {
@@ -30,21 +32,21 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.json:json:20171018'
+    implementation 'org.json:json:20250107'
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    annotationProcessor 'org.projectlombok:lombok'
-    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    compileOnly 'org.projectlombok:lombok:1.18.36'
 
     //Postgres DB
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'com.h2database:h2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testCompile 'junit:junit:4.12'
-    testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
-
+testImplementation 'junit:junit:4.13.2'
+testImplementation group: 'com.h2database', name: 'h2', version: '2.3.232'
 }
 
 test {
