@@ -23,7 +23,13 @@ The app starts on port 100: http://localhost:100
 Latest Docker image: https://hub.docker.com/r/luzkix/bitcoinpricechecker
 
 ```bash
-docker run -d --name bitcoinpricechecker -p 100:100 luzkix/bitcoinpricechecker:latest
+    sudo docker run \
+        -d \
+        --name bitcoinpricechecker \
+        -p 100:100 \
+        --network=host \
+        --restart always \
+        luzkix/bitcoinpricechecker:latest
 ```
 
 The container listens on port 100 internally. Map a different local port with `-p 80:100` if needed.
