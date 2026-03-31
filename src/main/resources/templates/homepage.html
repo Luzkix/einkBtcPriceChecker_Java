@@ -1,51 +1,58 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-    <!-- IOS/Android fullScreen meta tag -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes">
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap CSS -->
-
-    <!-- Own CSS -->
     <link rel="stylesheet" href="/styles/homepageStyle.css"/>
 
-    <!-- Page Title -->
     <title>E-ink Bitcoin Price Checker</title>
 </head>
 
 <body>
-    <h1>E-ink Bitcoin Price Checker</h1>
-    <p><strong>Welcome to my simple Bitcoin Price Checker!</strong></p>
-    <p>This miniproject is about building easy to use web application/webpage which shows actual price of Bitcoin in USD/EUR.
-        The view is very simplistic, e-ink and widescreen optimised (I build it primarily for my android based e-ink book reader Likebook Mars, however every phone/tablet in widescreen should be fine).
-        Data are updated once per 30 sec based on Coinbase API. If there is connection/other error, just wait, the page will fix itself in some time :-)</p>
+    <div class="container">
+        <div class="logo">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="15" stroke="#f7931a" stroke-width="2"/>
+                <path d="M21.5 14.2c.3-1.9-1.2-2.9-3.2-3.6l.7-2.6-1.6-.4-.6 2.5c-.4-.1-.9-.2-1.3-.3l.7-2.5-1.6-.4-.7 2.6c-.4-.1-.7-.2-1-.3l-2.2-.6-.4 1.7s1.2.3 1.2.3c.7.2.8.6.8 1l-.8 3.1c0 .1.1.1.1.1l-.1 0-1.1 4.3c-.1.2-.3.5-.8.4 0 0-1.2-.3-1.2-.3l-.8 1.9 2.1.5c.4.1.8.2 1.2.3l-.7 2.7 1.6.4.7-2.7c.5.1.9.2 1.3.3l-.7 2.6 1.6.4.7-2.7c2.7.5 4.7.3 5.5-2.2.7-2 0-3.2-1.4-3.9 1-.2 1.8-1 2-2.4zm-3.6 5c-.5 1.9-3.7.9-4.7.6l.8-3.4c1 .3 4.3.8 3.9 2.8zm.5-5c-.4 1.7-3.1.8-3.9.6l.8-3.1c.8.2 3.5.7 3.1 2.5z" fill="#f7931a"/>
+            </svg>
+        </div>
 
-    <p><strong>Useful tips:</strong></p>
-    <li>Android users: for fullscreen open the web page in application such as Hermit</li>
-    <li>Apple iOS users: for fullscreen create link to this web page to homescreen, then simply run the newly created icon and it will open in Safari - fullscreen mode</li>
+        <h1>E-ink Bitcoin Price Checker</h1>
+        <p class="subtitle">Live BTC prices from Coinbase. Data refreshes every 30 seconds.</p>
+        <p class="description">A lightweight web app that displays the current Bitcoin price in USD or EUR.
+            Designed for e-ink readers and mobile devices with a clean, minimalist interface.
+            Open this page on any browser to get started.</p>
 
-    <h3>Select currency you want to display:</h3>
-    <div class="currencies">
-        <a th:href="@{/day/USD/}"><img id="dollar" src="icons/dollar_small.png"/></a>
-        <a th:href="@{/day/EUR/}"><img id="euro" src="icons/euro_small.png"/></a>
+        <div class="section-label">Select currency</div>
+        <div class="currency-grid">
+            <a th:href="@{/day/USD/}" class="currency-card usd">
+                <div class="currency-symbol">$</div>
+                <div class="currency-name">US Dollar</div>
+            </a>
+            <a th:href="@{/day/EUR/}" class="currency-card eur">
+                <div class="currency-symbol">&euro;</div>
+                <div class="currency-name">Euro</div>
+            </a>
+        </div>
+
+        <div class="divider"><span>or</span></div>
+
+        <div class="section-label">Night mode</div>
+        <div class="night-links">
+            <a th:href="@{/night/USD/}" class="night-link">USD</a>
+            <a th:href="@{/night/EUR/}" class="night-link">EUR</a>
+        </div>
+
+        <div class="footer">
+            Optimized for e-ink displays &middot; Source: Coinbase API
+        </div>
     </div>
-
-    <div class="nightMode">
-        For <strong>NIGHTMODE</strong> choose one of the following links:
-        <li><a th:href="@{/night/USD/}">USD nightmode</a></li>
-        <li><a th:href="@{/night/EUR/}">EUR nightmode</a></li>
-    </div>
-
 </body>
-<!-- Optional JavaScript -->
-<script>
-</script>
 </html>
