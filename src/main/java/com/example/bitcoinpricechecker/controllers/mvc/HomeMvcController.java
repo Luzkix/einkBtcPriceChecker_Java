@@ -1,6 +1,5 @@
 package com.example.bitcoinpricechecker.controllers.mvc;
 
-import com.example.bitcoinpricechecker.exceptionshandling.FetchingDataException;
 import com.example.bitcoinpricechecker.models.BitcoinPriceDTO;
 import com.example.bitcoinpricechecker.services.PriceService;
 import com.example.bitcoinpricechecker.services.TimeService;
@@ -30,7 +29,7 @@ public class HomeMvcController {
 
   @GetMapping("/{nightMode}/{currency}/")
   String displayPrice(@PathVariable String currency, @PathVariable String nightMode, Model model,
-                      HttpServletRequest request) throws FetchingDataException {
+                      HttpServletRequest request) {
     //if unknown currency, set USD as default
     currency = currency.equals("USD") || currency.equals("EUR") ? currency : "USD";
 
